@@ -302,7 +302,7 @@ section.block.dark .sec-head::after {
 /* 数据栏：报纸式排布——墨色顶线 + 大数字，去卡片框（吕敬人式呼吸） */
 .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 38px 46px; }
 .stat { border-top: 2px solid var(--ink); padding-top: 16px; }
-.stat .num { font-family: var(--serif); font-size: clamp(44px, 5.4vw, 70px); font-weight: 700; color: var(--ink); line-height: 1.05; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.stat .num { font-family: var(--serif); font-size: clamp(40px, 4.6vw, 62px); font-weight: 700; color: var(--ink); line-height: 1.05; letter-spacing: -.01em; font-variant-numeric: tabular-nums; white-space: nowrap; }
 @media (max-width: 760px) {
   .stat .num { font-size: clamp(34px, 10vw, 44px); }
   .stats { gap: 28px 30px; }

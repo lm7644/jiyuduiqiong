@@ -4,100 +4,66 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#a8452e">
-<title>语音导览 · 积玉堆琼</title>
+<title>影音推荐 · 积玉堆琼</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23241d14'/%3E%3Ccircle cx='32' cy='32' r='27' fill='none' stroke='%23b08d3e' stroke-width='2' opacity='.85'/%3E%3Ccircle cx='32' cy='32' r='6.5' fill='none' stroke='%23d9ae52' stroke-width='3.4'/%3E%3Cg stroke='%23d9ae52' stroke-width='4.6'%3E%3Cline x1='32' y1='9' x2='32' y2='17'/%3E%3Cline x1='32' y1='47' x2='32' y2='55'/%3E%3Cline x1='9' y1='32' x2='17' y2='32'/%3E%3Cline x1='47' y1='32' x2='55' y2='32'/%3E%3Cline x1='14.8' y1='14.8' x2='20.6' y2='20.6'/%3E%3Cline x1='49.2' y1='14.8' x2='43.4' y2='20.6'/%3E%3Cline x1='14.8' y1='49.2' x2='20.6' y2='43.4'/%3E%3Cline x1='49.2' y1='49.2' x2='43.4' y2='43.4'/%3E%3C/g%3E%3C/svg%3E">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="积玉堆琼">
-<meta property="og:title" content="语音导览 · 积玉堆琼">
-<meta property="og:description" content="把本站经核实的五族文化词条读给你听——浏览器原生语音合成，无需联网音频。附一份诚实的调研：为什么开放平台上找不到五族民族语的真实录音。">
+<meta property="og:title" content="影音推荐 · 积玉堆琼">
+<meta property="og:description" content="从丽江出发的影视、纪录片与音乐推荐：电影、剧集、原声唱片，逐条注明出处——看什么、听什么，一次指路。">
 <meta property="og:image" content="assets/img/hero-lijiang-snow.jpg">
-<meta name="description" content="五族文化词条语音导览：浏览器原生朗读 + 民族语录音开放档案调研结论。">
+<meta name="description" content="丽江五族文化影音推荐：经核实的电影、电视剧、纪录片与音乐专辑，逐条注明出处与平台方向。">
 <link rel="stylesheet" href="assets/css/main.css">
-<style>
-  .aud-group { border: 1px solid rgba(176,141,62,.4); border-radius: 6px; overflow: hidden; background: rgba(245,240,230,.6); }
-  .aud-group > .gh {
-    display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;
-    padding: 16px 22px; background: rgba(28,26,23,.045); border-bottom: 1px solid rgba(176,141,62,.3);
-  }
-  .aud-group .gh h3 { font-family: var(--serif); font-size: 20px; letter-spacing: 0; color: var(--ink); }
-  .aud-group .gh h3 small { font-family: var(--latin); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #6b6459; margin-left: 10px; font-weight: 400; }
-  .aud-row {
-    display: flex; align-items: flex-start; gap: 16px; padding: 14px 22px;
-    border-bottom: 1px solid rgba(176,141,62,.16);
-  }
-  .aud-row:last-child { border-bottom: none; }
-  .aud-row .t { font-family: var(--serif); font-size: 17px; font-weight: 700; color: var(--ink); letter-spacing: 0; white-space: nowrap; padding-top: 1px; }
-  .aud-row .d { flex: 1; font-size: 14.5px; color: var(--ink-2); line-height: 1.85; }
-  .speak-btn {
-    display: inline-flex; align-items: center; gap: 7px; background: rgba(168,69,46,.08); color: var(--terra);
-    border: 1px solid rgba(168,69,46,.35); border-radius: 999px; padding: 6px 14px; font-size: 12.5px; letter-spacing: 1px;
-    cursor: pointer; min-height: 42px; min-width: 42px; font-family: var(--sans); flex-shrink: 0;
-  }
-  .speak-btn:hover { background: rgba(168,69,46,.16); }
-  .speak-btn svg { width: 14px; height: 14px; }
-  .speak-btn.speaking { background: rgba(51,96,79,.14); border-color: var(--jade); color: var(--jade); }
-  .playall { font-family: var(--sans); }
-  .rate-ctl { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin: 0 0 26px; }
-  .rate-ctl .lbl { font-family: var(--latin); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #6b6459; }
-  .no-speech { display: none; background: rgba(168,69,46,.08); border: 1px dashed rgba(168,69,46,.5); border-radius: 4px; padding: 16px 20px; font-size: 14px; color: var(--ink-2); line-height: 1.9; }
-  @media (max-width: 760px) {
-    .aud-row { flex-wrap: wrap; row-gap: 2px; }
-    .aud-row .t { white-space: normal; flex: 1; padding-right: 10px; }
-    .aud-row .d { flex-basis: 100%; padding-left: 58px; }
-    .rate-ctl { gap: 8px; }
-  }
-</style>
 </head>
 <body data-theme="gold">
-<a class="skip" href="#content">跳到正文</a>
+<a class="skip" href="#main">跳到正文</a>
 <div id="progress"></div>
 
 <header class="site-head">
   <div class="wrap bar">
-    <a class="brand" href="index.html" aria-label="积玉堆琼 · 首页"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#241d14"/><circle cx="32" cy="32" r="27.5" fill="none" stroke="#b08d3e" stroke-width="1.1" opacity=".85"/><circle cx="32" cy="32" r="6.5" fill="none" stroke="#d9ae52" stroke-width="2.6"/><g stroke="#d9ae52" stroke-width="3.8"><line x1="32" y1="10" x2="32" y2="17.5"/><line x1="32" y1="46.5" x2="32" y2="54"/><line x1="10" y1="32" x2="17.5" y2="32"/><line x1="46.5" y1="32" x2="54" y2="32"/><line x1="16.4" y1="16.4" x2="21.8" y2="21.8"/><line x1="47.6" y1="16.4" x2="42.2" y2="21.8"/><line x1="16.4" y1="47.6" x2="21.8" y2="42.2"/><line x1="47.6" y1="47.6" x2="42.2" y2="42.2"/></g></svg><span><span class="name">积玉堆琼</span><span class="sub">Lijiang · Five Peoples</span></span></a>
+    <a class="brand" href="index.html" aria-label="积玉堆琼 · 首页"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#241d14"/><circle cx="32" cy="32" r="27.5" fill="none" stroke="#b08d3e" stroke-width="1.1" opacity=".85"/><circle cx="32" cy="32" r="6.5" fill="none" stroke="#d9ae52" stroke-width="2.6"/><g stroke="#d9ae52" stroke-width="3.8"><line x1="32" y1="10" x2="32" y2="17.5"/><line x1="32" y1="46.5" x2="32" y2="54"/><line x1="10" y1="32" x2="17.5" y2="32"/><line x1="46.5" y1="32" x2="54" y2="32"/><line x1="16.4" y1="16.4" x2="21.8" y2="21.8"/><line x1="47.6" y1="16.4" x2="42.2" y2="21.8"/><line x1="16.4" y1="47.6" x2="21.8" y2="42.4"/><line x1="47.6" y1="47.6" x2="42.4" y2="42.4"/></g></svg><span><span class="name">积玉堆琼</span><span class="sub">Lijiang · Five Peoples</span></span></a>
     <button id="menuBtn" aria-label="菜单"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke="currentColor"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-    <nav class="nav" id="nav"><a href="naxi.html">纳西族</a><a href="mosuo.html">摩梭</a><a href="yi.html">彝族</a><a href="lisu.html">傈僳族</a><a href="bai.html">白族</a><a href="pumi.html">普米族</a><span class="nav-sep" aria-hidden="true"></span><div class="drop"><button type="button" class="drop-btn on" aria-haspopup="true" aria-expanded="false">专题<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button><div class="drop-menu"><a href="heritage.html">三项世界遗产</a><a href="dongba.html">东巴文献地图</a><a href="glyphs.html">东巴文字谱</a><a href="gallery.html">三维展厅</a><a href="audio.html" class="on">语音导览</a></div></div><span class="nav-sep" aria-hidden="true"></span><a href="timeline.html">年表</a><a href="resources.html">资源</a><a href="about.html">关于</a></nav>
+    <nav class="nav" id="nav"><a href="naxi.html">纳西族</a><a href="mosuo.html">摩梭</a><a href="yi.html">彝族</a><a href="lisu.html">傈僳族</a><a href="bai.html">白族</a><a href="pumi.html">普米族</a><span class="nav-sep" aria-hidden="true"></span><div class="drop"><button type="button" class="drop-btn" aria-haspopup="true" aria-expanded="false">专题<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button><div class="drop-menu"><a href="heritage.html">三项世界遗产</a><a href="dongba.html">东巴文献地图</a><a href="glyphs.html">东巴文字谱</a><a href="gallery.html">三维展厅</a><a href="audio.html" class="on">影音推荐</a></div></div><span class="nav-sep" aria-hidden="true"></span><a href="timeline.html">年表</a><a href="resources.html">资源</a><a href="about.html">关于</a></nav>
   </div>
 </header>
 
 <section class="page-hero">
-  <div class="bg" style="background-image:url('assets/img/lijiang-night.jpg')"></div>
-  <div class="veil"></div>
-  <div class="inner wrap">
-    <p class="crumb">Audio Guide · 语音导览</p>
-    <h1>读给你听<small>本站经核实词条 · 浏览器原生朗读</small></h1>
-  </div>
-</section>
-
-<section id="content" class="block" style="padding-top:46px">
   <div class="wrap">
-    <p class="lead-p rv">这是一部「零音频文件」的语音导览：词条全部来自本站六个分馆里经核实的术语，由浏览器自带的语音合成（Web Speech API）用普通话读出——<b>不下载任何音频、不调用任何云端服务</b>。每条可单独听，也可以整组连读。</p>
-    <div class="no-speech rv" id="noSpeech">当前浏览器不支持语音合成（或没有可用的中文语音）——词条仍可阅读，朗读按钮已自动隐藏。换用较新的 Chrome / Edge / Safari 即可恢复。</div>
-    <div class="rate-ctl rv" id="rateCtl" style="margin-top:26px">
-      <span class="lbl">语速</span>
-      <button class="chip on" data-rate="0.82">从容</button>
-      <button class="chip" data-rate="1">标准</button>
-      <button class="chip" data-rate="1.18">轻快</button>
-    </div>
+    <p class="kicker">Watch &amp; Listen · 影音推荐</p>
+    <h1>看什么，听什么<small>从丽江出发的影像与声音——全部为公开发行的真实作品</small></h1>
+    <p class="lead-p">本站不做模拟语音导览：静态网页里，机器朗读替代不了现场的声音。这一页改为推荐<b>真实存在的影视与音乐产品</b>——电影、剧集、纪录片、专辑，逐条注明年份、创作者与出处。本馆不嵌播、不搬运，只指路：请经正规平台观看与收听。</p>
   </div>
 </section>
 
-<section class="block alt">
-  <div class="wrap" style="position:relative">
-    <span class="side-mark">六组词条</span>
-    <div class="sec-head rv"><span class="zh">导览词表</span></div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:26px" id="groups"></div>
-  </div>
-</section>
-
-<section class="block">
+<section class="block" id="main">
   <div class="wrap">
-    <div class="sec-head rv"><span class="zh">为什么没有民族语的声音</span></div>
-    <div class="entries rv">
-      <div class="entry"><div class="term">我们找过了 <span class="tag">2026-10 调研</span></div><div class="def">以 Wikimedia Commons API 按「Naxi / Lisu / Bai / Nuosu / Mosuo + 音频」与相应语言分类系统检索：五族语言分类下的音频文件均为<b>零</b>；Lingua Libre（维基媒体录音工程）无纳西语、傈僳语、白语、彝语、普米语条目；检索到的疑似条目逐一核验，均为他语种假命中（如 Tyap 语单词「bai」）。Internet Archive 的民族音乐档案在本次工作网络中不可达，未能核验。</div></div>
-      <div class="entry"><div class="term">空缺本身是内容 <span class="tag">诚实呈现</span></div><div class="def">真实民族语录音存在两大门槛：一是<b>权限</b>——东巴诵经等仪式音声的采集与传播需社区与传承人授权；二是<b档案>——现存录音多藏于高校、研究院与付费民族语言学档案（如 ELAR、PARADISEC），无开放许可版本。本站不做「用机器合成冒充民族语」的事，因此导览读的是普通话释义，并把田野录音列为与东巴文化研究院、丽江市博物院等机构合作的正式方向（见<a class="cite" href="about.html">方法论</a>）。</div></div>
-      <div class="entry"><div class="term">想听真正的声音 <span class="tag">三条路径</span></div><div class="def">① 丽江实地：东巴文化传承展演（丽江东巴文化博物院/玉水寨）与各族自治县节庆；② 权威在线资源见<a class="cite" href="resources.html">资源目录</a>的纪录片与机构条目；③ 学术档案：论文数据库中检索 Naxi / Lisu songs 的田野录音附册（多需机构订阅）。</div></div>
+    <div class="sec-head rv"><span class="zh">电影与电视剧</span></div>
+    <div class="entries">
+      <div class="entry"><div class="term">《千里走单骑》 <span class="tag">2005 · 张艺谋</span></div><div class="def">主要拍摄地在云南丽江束河一带与玉龙雪山，首映庆典即设在雪山之下。一个父亲替儿子赴滇西完成傩戏心愿的故事——丽江的山、古镇与普通人共同构成了这部片的底色。来源：影片维基百科词条；2005 年首映报道（新浪/搜狐）。</div></div>
+      <div class="entry"><div class="term">《木府风云》 <span class="tag">2012 · 央视首播</span></div><div class="def">首部纳西族历史题材电视剧，讲述明代木氏土司府内外的家国故事，女主角阿勒邱史有其人。该剧播出当年，木府参观人次突破百万、创历史新高。来源：中新网 2012 报道；新华网《丽江木府》专题（2025）。</div></div>
+      <div class="entry"><div class="term">《云上石头城》 <span class="tag">2017 · 纳西语版</span></div><div class="def">丽江第一部由纳西族导演执导的电影，在宝山石头城实景拍摄，汉语与纳西语两个版本同映——想听纳西语，这是院线电影里难得的一条正路。主题曲《云中的村庄》由丽江本土音乐人打造。来源：影片百科词条；文旅头条 2017。</div></div>
+      <div class="entry"><div class="term">《阿诗玛》 <span class="tag">1964 · 音乐歌舞片</span></div><div class="def">中国第一部彩色宽银幕立体声音乐歌舞片，取材自彝族<b>撒尼人</b>（石林地区）叙事长诗——彝族文化经典影像，1982 年获西班牙桑坦德第一届国际音乐最佳舞蹈片奖。注意：阿诗玛属撒尼支系，非丽江小凉山叙事。来源：中国非物质文化遗产网《阿诗玛》专文。</div></div>
+      <div class="entry"><div class="term">《茶马古道·德拉姆》 <span class="tag">2004 · 田壮壮</span></div><div class="def">纪录片：沿滇藏茶马古道（怒江流域段）记录马帮与沿线各族居民的日常。「德拉姆」在藏语中意为「平安女仙」。田壮壮凭此获首届中国导演协会最佳导演奖。茶马古道的另一头，正是丽江——四方街曾是这条路的集市中枢。来源：影片维基百科词条。</div></div>
+      <div class="entry"><div class="term">《印象·丽江》 <span class="tag">2006 · 实景演出</span></div><div class="def">张艺谋团队创作的大型实景演出「雪山篇」，2006 年 7 月在海拔 3100 米的玉龙雪山脚下正式公演，以雪山为幕、原生态歌舞为体。去丽江现场可看——它本身即是「一分钟影像部族志」。来源：演出公演报道（2006）。</div></div>
     </div>
+
+    <div class="sec-head rv" style="margin-top:44px"><span class="zh">纪录片</span></div>
+    <div class="entries">
+      <div class="entry"><div class="term">《三个摩梭女子的故事》 <span class="tag">纪录片</span></div><div class="def">二十多年前拍摄的纪录片，通过老、中、青三代摩梭女性呈现母系家庭与两性关系的真实样貌——是对「走婚天堂」式猎奇叙事最好的解毒剂。来源：豆瓣条目及多篇评论（2024）。</div></div>
+      <div class="entry"><div class="term">《回到摩梭》 <span class="tag">纪录片 · 52 分钟</span></div><div class="def">跟随摩梭少女泽塔·甲次玛由都市重返泸沽湖畔的山村：达布（女当家）的权威、「舅掌礼仪母掌财」的家庭分工、成丁礼与走婚的自律传统。来源：央视网节目页（片长 1×52 分钟）。</div></div>
+      <div class="entry"><div class="term">《寻找女儿国》 <span class="tag">纪录片</span></div><div class="def">以「转山转海节」的真实记录与成丁礼、爬花楼等情景再现，呈现泸沽湖畔的摩梭社会。与《回到摩梭》对照观看，恰好覆盖节庆与家庭两个切面。来源：影片百科词条。</div></div>
+    </div>
+
+    <div class="sec-head rv" style="margin-top:44px"><span class="zh">音乐</span></div>
+    <div class="entries">
+      <div class="entry"><div class="term">《纳西古乐》专辑 <span class="tag">大研纳西古乐会 · 宣科</span></div><div class="def">丽江中国大研纳西古乐会演奏、宣科主持的经典唱片（豆瓣音乐 8.7 分）：白沙细乐与洞经音乐，「笃」是纳西古语——「让灵魂洗澡」。1987 年起宣科任会长，把这套古乐带出国门。来源：豆瓣音乐条目；搜狐 2022 报道。</div></div>
+      <div class="entry"><div class="term">傈僳族无伴奏多声部合唱 <span class="tag">怒江 · 「峡谷天籁」</span></div><div class="def">「摆时」「木刮」「优叶」三大调的无伴奏多声部合唱。泸水百花岭村的傈僳族农民合唱团（全村 300 多人、团员 100 多人）1996 年在金鸡百花电影节以《友谊地久天长》一鸣惊人，1998–1999 年以《欢乐颂》与《摆时》震撼中外艺术家。来源：泸水市人民政府网；百度百科《傈僳族音乐》。</div></div>
+      <div class="entry"><div class="term">《采风集之彝族、傈僳族民歌》 <span class="tag">索尼精选 · Hi-Res</span></div><div class="def">正式发行的民族音乐采风专辑（Hi-Res 音源平台在售）：收录彝族、傈僳族民歌，含凉山彝族送亲歌与「摆时」「优叶」「木刮」三大调——想「听到」民族语，这是合法且高音质的入口。来源：索尼精选 Hi-Res 音乐专辑页。</div></div>
+      <div class="entry"><div class="term">莫西子诗《原野》 <span class="tag">2014 · 彝语</span></div><div class="def">凉山彝族音乐人的首张个人专辑，彝语演唱；《月亮白得很》（2018）续之。他为彝族山鹰组合成员瓦其依合写的《不要怕》（收录于《黑鹰之梦》，2009）已成彝语流行音乐的代表作。来源：维基百科词条；彝族人网。</div></div>
+      <div class="entry"><div class="term">普米族「搓蹉」与四弦舞乐 <span class="tag">演出影像 · 国家级非遗</span></div><div class="def">中央网信办指导的「可爱的中国」各族文化系列短视频（58 集）中的普米族一集：省级传承人李海术弹四弦、跳「搓蹉」，曾携舞赴斯洛伐克、捷克演出。来源：光明网/央视网 2019。</div></div>
+    </div>
+
+    <div class="note rv" style="margin-top:40px"><b>为什么没有「民族语语音导览」：</b>2026-10 调研经 Commons / Lingua Libre API 系统检索，五族民族语的真实录音在开放平台为零；现存录音多藏于高校、研究院与付费档案，且仪式音声的采集传播需社区与传承人授权。本站不以机器合成冒充民族语——真实录音授权，仍是与东巴文化研究院等机构合作的方向（见<a href="about.html" style="color:var(--gold)">关于</a>）。</div>
+    <div class="note rv" style="margin-top:16px"><b>推荐原则：</b>只收公开发行、可查证的作品；条目按「作品名 · 年份/创作者 · 出处」著录，信息以来源页为准；链接与平台归属可能随时间变化，如遇失效请以片名/专辑名自行检索。</div>
   </div>
 </section>
 
@@ -106,155 +72,14 @@
     <div class="foot-grid">
       <div><svg class="seal-mini" width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#241d14"/><circle cx="32" cy="32" r="27" fill="none" stroke="#b08d3e" stroke-width="1.6" opacity=".8"/><circle cx="32" cy="32" r="6.5" fill="none" stroke="#d9ae52" stroke-width="3"/><g stroke="#d9ae52" stroke-width="4.2"><line x1="32" y1="10.5" x2="32" y2="17.5"/><line x1="32" y1="46.5" x2="32" y2="53.5"/><line x1="10.5" y1="32" x2="17.5" y2="32"/><line x1="46.5" y1="32" x2="53.5" y2="32"/><line x1="16.6" y1="16.6" x2="21.6" y2="21.6"/><line x1="47.4" y1="16.6" x2="42.4" y2="21.6"/><line x1="16.6" y1="47.4" x2="21.6" y2="42.4"/><line x1="47.4" y1="47.4" x2="42.4" y2="42.4"/></g></svg><p>积玉堆琼 · 丽江五族文化线上展馆——开放资料的人文整合。图片均来自 Wikimedia Commons 开放授权文件，逐图署名。</p></div>
       <div><b>五族</b><br><a href="naxi.html">纳西族</a><a href="mosuo.html">摩梭人</a><a href="yi.html">彝族</a><a href="lisu.html">傈僳族</a><a href="bai.html">白族</a><a href="pumi.html">普米族</a></div>
-      <div><b>展馆</b><br><a href="heritage.html">三项世界遗产</a><a href="dongba.html">东巴文献全球地图</a><a href="glyphs.html">东巴文字谱</a><a href="gallery.html">三维展厅</a><a href="audio.html">语音导览</a><a href="timeline.html">大事年表</a><a href="resources.html">资源目录</a><a href="about.html">关于与方法论</a></div>
+      <div><b>展馆</b><br><a href="heritage.html">三项世界遗产</a><a href="dongba.html">东巴文献全球地图</a><a href="glyphs.html">东巴文字谱</a><a href="gallery.html">三维展厅</a><a href="audio.html">影音推荐</a><a href="timeline.html">大事年表</a><a href="resources.html">资源目录</a><a href="about.html">关于与方法论</a></div>
     </div>
     <div class="foot-base"><span>© <span id="yr">2026</span> 积玉堆琼 · 丽江五族文化线上展馆</span><span>图片：Wikimedia Commons（逐图署名） · 数据时点：2026-10</span></div>
   </div>
 </footer>
 
-<div id="lightbox"><button class="x" aria-label="关闭">×</button><button class="arr prev" aria-label="上一张">‹</button><img loading="lazy" alt=""><button class="arr next" aria-label="下一张">›</button><div class="cap"></div></div>
 <button id="top" aria-label="回到顶部">↑</button>
+<div id="lightbox"><button class="x" aria-label="关闭">×</button><button class="arr prev" aria-label="上一张">‹</button><img loading="lazy" alt=""><button class="arr next" aria-label="下一张">›</button><div class="cap"></div></div>
 <script src="assets/js/app.js"></script>
-<script>
-(function () {
-  'use strict';
-  var GROUPS = [
-    { name: '纳西族', en: 'Naxi', link: 'naxi.html', items: [
-      { t: '东巴文', d: '纳西语称森究、鲁究，木石上的痕迹。至今仍在仪式中使用的活形态象形文字。' },
-      { t: '东巴经', d: '东巴用东巴文写成的宗教典籍，存世约三万册，分藏十余国，二〇〇三年入选世界记忆名录。' },
-      { t: '《创世纪》', d: '纳西族三大史诗之首，东巴经中的开篇长卷。' },
-      { t: '披星戴月', d: '纳西妇女服饰的肩部图案，七星围月，喻勤苦劳作。' },
-      { t: '纳西古乐', d: '由白沙细乐与洞经音乐等汇流而成的器乐传统，被誉为音乐活化石。' },
-      { t: '白沙壁画', d: '明代壁画，融汉、藏、纳西佛教与道教艺术于一体，全国重点文物保护单位。' }
-    ] },
-    { name: '摩梭人', en: 'Mosuo', link: 'mosuo.html', items: [
-      { t: '母系大家庭', d: '以母系血缘为纽带的家户结构，家庭成员多居住于同一院落。' },
-      { t: '祖母屋', d: '摩梭四合院中的正房，家庭生活与仪式的中心。' },
-      { t: '阿夏异居婚', d: '学界对摩梭走婚的规范表述：伴侣各居母家，感情自主，关系可自由解除。' },
-      { t: '达巴教', d: '摩梭本土信仰，达巴祭司口传心授，无成文经典。' },
-      { t: '转山节', d: '农历七月二十五，格姆女神山脚下的年度大祭。' },
-      { t: '甲搓舞', d: '意为美好的时辰跳舞，泸沽湖畔的集体歌舞。' }
-    ] },
-    { name: '彝族', en: 'Yi / Nuosu', link: 'yi.html', items: [
-      { t: '毕摩', d: '识彝文、掌典籍、主持仪式的彝族祭司，彝族传统文化的核心传承者。' },
-      { t: '苏尼', d: '不识经书、以击鼓跳神为业的巫职，与毕摩并立。' },
-      { t: '规范彝文', d: '一九八〇年国务院批准的彝文规范方案，八百一十九个规范字符。' },
-      { t: '察尔瓦', d: '彝语称石都，羊毛擀制的披毡，凉山彝族的标志性服饰。' },
-      { t: '彝族漆器', d: '红黄黑三色髹饰的木质餐具酒具，国家级非物质文化遗产。' },
-      { t: '达体舞与克智', d: '集体踏歌达体舞，与即兴辞赋比赛克智，凉山彝俗的两张面孔。' }
-    ] },
-    { name: '傈僳族', en: 'Lisu', link: 'lisu.html', items: [
-      { t: '阔时节', d: '傈僳岁首节，意为新年的开始，唱歌、射弩、过溜索。' },
-      { t: '刀杆节', d: '农历二月初八，先下火海、再上刀山，赤足攀爬三十六把钢刀的刀梯。' },
-      { t: '老傈僳文', d: '传教士富能仁一九二〇年代创制的拉丁变体文字，二〇〇九年收入Unicode。' },
-      { t: '傈僳竹书', d: '维西农民汪忍波一九二四至三〇年间独力创制的音节文字，因刻写竹片得名。' },
-      { t: '木刮、摆时、优叶', d: '傈僳民歌三大调，多声部合唱，被称为天籁之音。' },
-      { t: '火草布', d: '以火草叶纤维捻线织布，以叶织衣的古法纺织。' }
-    ] },
-    { name: '白族', en: 'Bai', link: 'bai.html', items: [
-      { t: '本主', d: '白族村社各自供奉的保护神，一村一庙，人格化的地方信仰。' },
-      { t: '白族调', d: '又称白曲，白语演唱的山歌小调，列入国家级非物质文化遗产。' },
-      { t: '九河头巾', d: '丽江九河白族妇女的多层挑花头巾，蓝底白线，层数有别。' },
-      { t: '语言与文字', d: '白语属汉藏语系藏缅语族，历史上长期通用汉字，兼用汉字记白音。' },
-      { t: '木石工匠', d: '白族木匠、石匠世家遍布滇西北，丽江古城营造史上留有大量白族匠作。' }
-    ] },
-    { name: '普米族', en: 'Pumi', link: 'pumi.html', items: [
-      { t: '韩规教', d: '普米族原生信仰体系，韩规祭司传承经典、绘画与历法。' },
-      { t: '韩规文', d: '韩规经书使用的文字，处于濒危状态，传承人极稀。' },
-      { t: '拈达则', d: '普米语封山仪式，保护山林与水源的村规仪式，国家级非物质文化遗产。' },
-      { t: '吾昔节', d: '普米语新年，云南省省级非物质文化遗产。' },
-      { t: '成丁礼', d: '普米少年十三岁行成丁礼，换装着成人服饰。' },
-      { t: '搓蹉', d: '四弦琴比柏伴奏的圆圈舞，四十七套舞步。' }
-    ] }
-  ];
-
-  var supported = !!('speechSynthesis' in window) && !!window.speakZh;
-  if (!supported) {
-    document.getElementById('noSpeech').style.display = 'block';
-    document.getElementById('rateCtl').style.display = 'none';
-  }
-
-  var rate = 0.82;
-  var rateChips = document.querySelectorAll('#rateCtl .chip');
-  rateChips.forEach(function (c) {
-    c.addEventListener('click', function () {
-      rateChips.forEach(function (x) { x.classList.remove('on'); });
-      c.classList.add('on');
-      rate = parseFloat(c.getAttribute('data-rate'));
-    });
-  });
-
-  var SPK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.4 5.6a9 9 0 0 1 0 12.8"/></svg>';
-  var groupsEl = document.getElementById('groups');
-
-  function markSpeaking(btn, on) { btn.classList.toggle('speaking', on); }
-
-  GROUPS.forEach(function (g) {
-    var box = document.createElement('div');
-    box.className = 'aud-group rv';
-    var gh = document.createElement('div');
-    gh.className = 'gh';
-    gh.innerHTML = '<h3>' + g.name + '<small>' + g.en + '</small></h3>';
-    var playAll = document.createElement('button');
-    playAll.className = 'speak-btn playall';
-    playAll.type = 'button';
-    playAll.innerHTML = SPK + '<span>连读本组</span>';
-    gh.appendChild(playAll);
-    box.appendChild(gh);
-    var rows = [];
-    g.items.forEach(function (it) {
-      var row = document.createElement('div');
-      row.className = 'aud-row';
-      var b = document.createElement('button');
-      b.className = 'speak-btn';
-      b.type = 'button';
-      b.setAttribute('aria-label', '朗读：' + it.t);
-      b.innerHTML = SPK;
-      var t = document.createElement('div');
-      t.className = 't'; t.textContent = it.t;
-      var d = document.createElement('div');
-      d.className = 'd'; d.textContent = it.d;
-      row.appendChild(b); row.appendChild(t); row.appendChild(d);
-      box.appendChild(row);
-      rows.push({ btn: b, text: it.t + '。' + it.d });
-      if (supported) {
-        b.addEventListener('click', function () {
-          rows.forEach(function (r) { markSpeaking(r.btn, false); });
-          markSpeaking(b, true);
-          window.speakZh(it.t + '。' + it.d, rate);
-          setTimeout(function () { markSpeaking(b, false); }, 900 + it.d.length * 130);
-        });
-      } else { b.style.display = 'none'; }
-    });
-    if (supported) {
-      playAll.addEventListener('click', function () {
-        rows.forEach(function (r) { markSpeaking(r.btn, false); });
-        markSpeaking(playAll, true);
-        var i = 0;
-        function next() {
-          if (i >= rows.length) { markSpeaking(playAll, false); return; }
-          var r = rows[i++];
-          markSpeaking(r.btn, true);
-          var u = new SpeechSynthesisUtterance(r.text);
-          u.lang = 'zh-CN';
-          u.rate = rate;
-          u.onend = function () { markSpeaking(r.btn, false); next(); };
-          u.onerror = function () { markSpeaking(r.btn, false); next(); };
-          try { speechSynthesis.speak(u); } catch (e) { next(); }
-        }
-        try { speechSynthesis.cancel(); } catch (e) {}
-        next();
-      });
-    } else { playAll.style.display = 'none'; }
-    groupsEl.appendChild(box);
-  });
-  /* 重新触发渐显观察（新插入的 .rv） */
-  if ('IntersectionObserver' in window) {
-    document.querySelectorAll('.rv:not(.in)').forEach(function (el) {
-      el.classList.add('in');
-    });
-  }
-})();
-</script>
 </body>
 </html>
