@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#a8452e">
+<title>东巴文献全球流散长卷 · 积玉堆琼</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23241d14'/%3E%3Ccircle cx='32' cy='32' r='27' fill='none' stroke='%23b08d3e' stroke-width='2' opacity='.85'/%3E%3Ccircle cx='32' cy='32' r='6.5' fill='none' stroke='%23d9ae52' stroke-width='3.4'/%3E%3Cg stroke='%23d9ae52' stroke-width='4.6'%3E%3Cline x1='32' y1='9' x2='32' y2='17'/%3E%3Cline x1='32' y1='47' x2='32' y2='55'/%3E%3Cline x1='9' y1='32' x2='17' y2='32'/%3E%3Cline x1='47' y1='32' x2='55' y2='32'/%3E%3Cline x1='14.8' y1='14.8' x2='20.6' y2='20.6'/%3E%3Cline x1='49.2' y1='14.8' x2='43.4' y2='20.6'/%3E%3Cline x1='14.8' y1='49.2' x2='20.6' y2='43.4'/%3E%3Cline x1='49.2' y1='49.2' x2='43.4' y2='43.4'/%3E%3C/g%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="积玉堆琼">
+<meta property="og:title" content="东巴文献全球流散长卷 · 积玉堆琼">
+<meta property="og:description" content="约3万册东巴经散藏全球十余国：丽江、北京、台北、莱顿、华盛顿、哈佛……一条从金沙江出发的流散长卷，与正在把它重新连起来的数字化工程。">
+<meta property="og:image" content="assets/img/hero-lijiang-snow.jpg">
+<meta name="description" content="约3万册东巴经散藏全球十余国：丽江、北京、台北、莱顿、华盛顿、哈佛……一条从金沙江出发的流散长卷，与正在把它重新连起来的数字化工程。">
+<link rel="stylesheet" href="assets/css/main.css">
+<style>
+  .strip-wrap {
+    overflow-x: auto; overflow-y: hidden; -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin; scrollbar-color: rgba(176,141,62,.55) rgba(176,141,62,.1);
+    padding-bottom: 8px;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 34px, #000 calc(100% - 52px), transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 34px, #000 calc(100% - 52px), transparent 100%);
+  }
+  .strip-wrap::-webkit-scrollbar { height: 6px; }
+  .strip-wrap::-webkit-scrollbar-track { background: rgba(176,141,62,.12); border-radius: 3px; }
+  .strip-wrap::-webkit-scrollbar-thumb { background: rgba(176,141,62,.5); border-radius: 3px; }
+  .strip { position: relative; width: 2080px; height: 500px; margin: 10px 0 0; }
+  .strip svg.river { position: absolute; inset: 0; }
+  .station { position: absolute; width: 172px; transform: translateX(-50%); }
+  .station .pin { width: 14px; height: 14px; border-radius: 50%; background: var(--terra); border: 3px solid var(--paper); box-shadow: 0 0 0 1.5px var(--terra); margin: 0 auto; }
+  .station.up { display: flex; flex-direction: column-reverse; align-items: center; gap: 10px; bottom: 243px; }
+  .station.down { display: flex; flex-direction: column; align-items: center; gap: 10px; top: 243px; }
+  .station .card {
+    background: rgba(245,240,230,.92); border: 1px solid rgba(176,141,62,.4); border-radius: 3px;
+    padding: 12px 14px; text-align: center; box-shadow: 0 6px 24px rgba(28,26,23,.08);
+  }
+  .station .card .city { font-family: var(--serif); font-size: 15.5px; font-weight: 700; color: var(--ink); letter-spacing: 2px; }
+  .station .card .org { font-size: 12px; color: #554e43; margin-top: 3px; line-height: 1.6; }
+  .station .card .vol { font-family: var(--serif); font-size: 21px; color: var(--terra); font-weight: 700; margin-top: 6px; font-variant-numeric: tabular-nums; }
+  .station .card .vol small { font-size: 12px; font-weight: 400; color: #554e43; }
+  .station .card .st { display: inline-block; font-size: 12px; letter-spacing: 1px; padding: 2px 9px; border-radius: 999px; margin-top: 8px; }
+  .st.on { background: rgba(51,96,79,.12); color: var(--jade); }
+  .st.off { background: rgba(107,100,89,.12); color: #554e43; }
+  .strip-hint { text-align: center; font-family: var(--latin); font-size: 12px; letter-spacing: 3px; color: #5a5348; margin-top: 14px; }
+</style>
+</head>
+<body data-theme="gold">
+<a class="skip" href="#content">跳到正文</a>
+<div id="progress"></div>
+
+<header class="site-head">
+  <div class="wrap bar">
+    <a class="brand" href="index.html" aria-label="积玉堆琼 · 首页"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#241d14"/><circle cx="32" cy="32" r="27.5" fill="none" stroke="#b08d3e" stroke-width="1.1" opacity=".85"/><circle cx="32" cy="32" r="6.5" fill="none" stroke="#d9ae52" stroke-width="2.6"/><g stroke="#d9ae52" stroke-width="3.8"><line x1="32" y1="10" x2="32" y2="17.5"/><line x1="32" y1="46.5" x2="32" y2="54"/><line x1="10" y1="32" x2="17.5" y2="32"/><line x1="46.5" y1="32" x2="54" y2="32"/><line x1="16.4" y1="16.4" x2="21.8" y2="21.8"/><line x1="47.6" y1="16.4" x2="42.2" y2="21.8"/><line x1="16.4" y1="47.6" x2="21.8" y2="42.2"/><line x1="47.6" y1="47.6" x2="42.2" y2="42.2"/></g></svg><span><span class="name">积玉堆琼</span><span class="sub">Lijiang · Five Peoples</span></span></a>
+    <button id="menuBtn" aria-label="菜单"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke="currentColor"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav"><a href="naxi.html">纳西族</a><a href="mosuo.html">摩梭</a><a href="yi.html">彝族</a><a href="lisu.html">傈僳族</a><a href="bai.html">白族</a><a href="pumi.html">普米族</a><span class="nav-sep" aria-hidden="true"></span><div class="drop"><button type="button" class="drop-btn on" aria-haspopup="true" aria-expanded="false">专题<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button><div class="drop-menu"><a href="heritage.html">三项世界遗产</a><a href="dongba.html" class="on">东巴文献地图</a><a href="glyphs.html">东巴文字谱</a><a href="gallery.html">三维展厅</a><a href="audio.html">语音导览</a></div></div><span class="nav-sep" aria-hidden="true"></span><a href="timeline.html">年表</a><a href="resources.html">资源</a><a href="about.html">关于</a></nav>
+  </div>
+</header>
+
+<section id="content" class="page-hero">
+  <div class="bg" style="background-image:url('assets/img/dongba-glyphs-wall.jpg');background-position:center 30%"></div>
+  <div class="veil"></div>
+  <div class="wrap inner">
+    <div class="crumb">Feature · Dongba Manuscripts Around the World</div>
+    <h1>东巴文献流散长卷<small>约 3 万册经书 · 十余个国家 · 一条从金沙江出发的路</small></h1>
+  </div>
+</section>
+
+<section id="content" class="block" style="padding-top:52px">
+  <div class="wrap" style="position:relative">
+    <span class="side-mark">纸上流亡</span>
+    <div class="sec-head rv"><span class="zh">它们去了哪里</span></div>
+    <div class="stats rv">
+      <div class="stat"><div class="num"><span data-count="30000">0</span><i>册</i></div><div class="lab">存世东巴经总量</div><div class="src">口径 2 万—4 万册 · 光明日报 2010</div></div>
+      <div class="stat"><div class="num"><span data-count="1500">0</span><i>种</i></div><div class="lab">经书种类（内容分类）</div><div class="src">丽江市东巴文化研究院</div></div>
+      <div class="stat"><div class="num"><span data-count="21842">0</span><i>册</i></div><div class="lab">Jackson 早期统计的地理分布</div><div class="src">大陆 12,741 · 美国 7,288 · 欧洲 1,513 · 台湾 300（转引自美国国会图书馆）</div></div>
+      <div class="stat"><div class="num"><span data-count="2003">0</span></div><div class="lab">入选《世界记忆名录》</div><div class="src">2003 年 8 月 · UNESCO Memory of the World</div></div>
+    </div>
+    <p class="lead-p rv" style="margin-top:34px">20 世纪上半叶，约瑟夫·洛克等人的收集让大批东巴经流向欧美；国内机构与民间的收藏则构成另一半版图。本长卷按「从丽江出发」的方向排列十座主要收藏地——卷数为公开报道口径，部分机构数量未核实（如实标注）。<b>拖动横卷，从金沙江走到哈佛。</b></p>
+  </div>
+</section>
+
+<section id="content" class="block alt" style="overflow:hidden">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="zh">流散长卷</span></div>
+    <div class="strip-wrap rv">
+      <div class="strip">
+        <svg class="river" viewBox="0 0 2080 500" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="riverfade" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0" stop-color="#b08d3e" stop-opacity="0"/>
+              <stop offset="0.035" stop-color="#b08d3e" stop-opacity=".6"/>
+              <stop offset="0.94" stop-color="#b08d3e" stop-opacity=".6"/>
+              <stop offset="1" stop-color="#b08d3e" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <line x1="0" y1="250" x2="2080" y2="250" stroke="url(#riverfade)" stroke-width="1.4" stroke-dasharray="7 6"/>
+          <line x1="0" y1="250" x2="2080" y2="250" stroke="url(#riverfade)" stroke-width="3.5" stroke-dasharray="1 167" stroke-linecap="round" opacity=".5"/>
+        </svg>
+        <div class="station up" style="left:6%">
+          <div class="pin"></div>
+          <div class="card"><div class="city">丽江</div><div class="org">丽江市东巴文化研究院</div><div class="vol">3,700+<small> 册</small></div><span class="st on">院藏已数字化</span></div>
+        </div>
+        <div class="station down" style="left:15%">
+          <div class="pin"></div>
+          <div class="card"><div class="city">昆明</div><div class="org">云南省民族古籍办等</div><div class="vol"><small>内部库 · 卷数未公开</small></div><span class="st off">西南最大民族古籍数据库</span></div>
+        </div>
+        <div class="station up" style="left:24%">
+          <div class="pin"></div>
+          <div class="card"><div class="city">北京</div><div class="org">国家图书馆<br>云南民族文字古籍特藏库</div><div class="vol">42<small> 部在线 · 六种文字合计</small></div><span class="st on">2024 上线可看</span></div>
+        </div>
+        <div class="station down" style="left:33%">
+          <div class="pin"></div>
+          <div class="card"><div class="city">台北</div><div class="org">各馆藏</div><div class="vol">≈300<small> 册</small></div><span class="st off">Jackson 统计口径</span></div>
+        </div>
+        <div class="station up" style="left:42%">
+          <div class="pin"></div>
+          <div class="card"><div class="city">莱顿</div><div class="org">莱顿大学图书馆</div><div class="vol">33<small> 卷</small></div><span class="st on">2023 在线展</span></div>
+        </div>
+        <div class="station down" style="left:51%">
+          <div class="pin"></div>
+          <div class="card"><div class="city">曼彻斯特</div><div class="org">John Rylands 图书馆</div><div class="vol">4<small> 卷</small></div><span class="st off">另有 2 种未刊译稿</span></div>
+        </div>
+        <div class="station up" style="left:60%">
+          <div class="pin"></div>
+          <div class="card"><div class="city">巴黎 / 柏林</div><div class="org">法国国家图书馆 · 柏林民族学博物馆</div><div class="vol"><small>收藏线索存在 · 待核实</small></div><span class="st off">数量未公开</span></div>
+        </div>
+        <div class="station down" style="left:70%">
+          <div class="pin"></div>
+          <div class="card"><div class="city">华盛顿</div><div class="org">美国国会图书馆</div><div class="vol">2,780<small> 卷</small></div><span class="st on">185 件在线 + 神路图</span></div>
+        </div>
+        <div class="station up" style="left:80%">
+          <div class="pin"></div>
+          <div class="card"><div class="city">剑桥</div><div class="org">哈佛燕京图书馆</div><div class="vol">600+<small> 卷</small></div><span class="st on">已数字化 · 合作译注</span></div>
+        </div>
+        <div class="station down" style="left:90%">
+          <div class="pin"></div>
+          <div class="card"><div class="city">∴ 回流</div><div class="org">识典古籍《创世纪》知识库<br>字节跳动 × 国图 × 研究院</div><div class="vol">2024<small> 上线</small></div><span class="st on">数字回家的路</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="strip-hint rv">— DRAG THE SCROLL · 拖动横卷 —</div>
+    <div class="note rv" style="margin-top:26px"><b>怎么「去看」：</b>可直接在线浏览的收藏——美国国会图书馆纳西手稿专题（185 件 + 约 12 米神路图长卷）、哈佛燕京图书馆纳西文献检索指南、莱顿大学 2023 在线展「The World's Last Picture Writing」、国家图书馆云南民族文字古籍特藏库。全部链接见 <a href="resources.html" style="color:var(--gold)">资源目录</a>。</div>
+  </div>
+</section>
+
+<section id="content" class="block">
+  <div class="wrap" style="position:relative">
+    <span class="side-mark">字之孤岛</span>
+    <div class="sec-head rv"><span class="zh">数字化与 AI 生态</span></div>
+    <div class="entries rv">
+      <div class="entry"><div class="term">《纳西东巴古籍译注全集》<span class="tag">100 卷</span></div><div class="def">丽江东巴文化研究院编译，云南人民出版社 1999—2000 年出齐，收经 897 种，「四对照」体例（影印·音标·直译·意译），国家「九五」重点图书出版工程。</div></div>
+      <div class="entry"><div class="term">东巴经典数字化国际共享平台 <span class="tag">国家社科重大项目</span></div><div class="def">2014 年启动，采集海外 11 家 + 国内 10 家收藏机构东巴古籍数字版 3,378 卷——「整合已有资源」路线的先行者。</div></div>
+      <div class="entry"><div class="term">东巴古籍智能翻译系统 <span class="tag">2024</span></div><div class="def">华东师范大学 × 丽江市东巴文化研究院联合研发：257,760 个手写东巴文数据库、563,580 组「形音义」多模态数据。</div></div>
+      <div class="entry"><div class="term">《创世纪》知识库 <span class="tag">识典古籍</span></div><div class="def">字节跳动公益 × 国家图书馆 × 东巴文化研究院，2024 年 1 月上线——东巴文汉文合璧的多媒体知识库，在「识典古籍」平台免费公开。</div></div>
+      <div class="entry"><div class="term">学术数据集 <span class="tag">AI 生态</span></div><div class="def">DongbaMIE（EMNLP 2025，23,530 句级图文对）· Dongba_1512（GitHub 开源单字集）· Dongba1800（1,800 页 / 11.2 万单字实例）· DB1404（中央民族大学手写集）——「东巴文 AI 解读」的学术基建已经成型。</div></div>
+      <div class="entry"><div class="term">Unicode 之憾</div><div class="def">东巴文至今未收入 Unicode：中国 2008 年提交提案 N3425（1,203 字符），因字数口径争议（约 1,188—2,223 字不等）搁置；哥巴文在 Unicode 路线图有暂定预留区 U+1AD00–U+1AFCF。在那之前，东巴文在数字世界的通行仍靠图片与专用字库（如「电子东巴」，2,223 字，商业授权）。</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="content" class="block alt">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="zh">文字的样子</span></div>
+    <div class="grid3 rv">
+      <figure class="fig"><img src="assets/img/dongba-script-1.jpg" alt="东巴文字样一" loading="lazy"><figcaption>东巴文字样<span class="credit">BrokenSphere / CC BY-SA 3.0 / Wikimedia Commons</span></figcaption></figure>
+      <figure class="fig"><img src="assets/img/dongba-script-2.jpg" alt="东巴文字样二" loading="lazy"><figcaption>东巴文字样<span class="credit">BrokenSphere / CC BY-SA 3.0 / Wikimedia Commons</span></figcaption></figure>
+      <figure class="fig"><img src="assets/img/dongba-calligraphy.jpg" alt="东巴书写" loading="lazy"><figcaption>东巴的书写<span class="credit">Popolon / CC BY-SA 3.0 / Wikimedia Commons</span></figcaption></figure>
+      <figure class="fig"><img src="assets/img/dongbawen-fire.jpg" alt="东巴经书页" loading="lazy"><figcaption>经书页<span class="credit">Popolon / CC BY-SA 4.0 / Wikimedia Commons</span></figcaption></figure>
+      <figure class="fig"><img src="assets/img/dongba-jar.jpg" alt="东巴仪式用器" loading="lazy"><figcaption>仪式用器<span class="credit">Popolon / CC BY-SA 4.0 / Wikimedia Commons</span></figcaption></figure>
+      <figure class="fig"><img src="assets/img/dongba-totems.jpg" alt="东巴木牌画" loading="lazy"><figcaption>木牌画<span class="credit">Popolon / CC BY-SA 4.0 / Wikimedia Commons</span></figcaption></figure>
+    </div>
+    <div class="quote rv" style="margin-top:52px">
+      <p>「天地还未分开，先有了天和地的影子；日月星辰还未出现，先有了日月星辰的影子。……三生九，九生万物。」</p>
+      <div class="by">—— 东巴经<b>《创世纪》</b>（《崇搬图》）汉译，转引自《纳西族哲学思想史》</div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="fbrand"><svg class="seal-mini" width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#241d14"/><circle cx="32" cy="32" r="27" fill="none" stroke="#b08d3e" stroke-width="1.6" opacity=".8"/><circle cx="32" cy="32" r="6.5" fill="none" stroke="#d9ae52" stroke-width="3"/><g stroke="#d9ae52" stroke-width="4.2"><line x1="32" y1="10.5" x2="32" y2="17.5"/><line x1="32" y1="46.5" x2="32" y2="53.5"/><line x1="10.5" y1="32" x2="17.5" y2="32"/><line x1="46.5" y1="32" x2="53.5" y2="32"/><line x1="16.6" y1="16.6" x2="21.6" y2="21.6"/><line x1="47.4" y1="16.6" x2="42.4" y2="21.6"/><line x1="16.6" y1="47.4" x2="21.6" y2="42.4"/><line x1="47.4" y1="47.4" x2="42.4" y2="42.4"/></g></svg><span class="name">积玉堆琼</span></div>
+        <p>站名出元 · 李京《雪山歌》：「丽江雪山天下绝，积玉堆琼几千叠。」丽江因金沙江古称「丽水」得名（《元史·地理志》：「路因江为名」）。</p>
+      </div>
+      <div>
+        <h4>展馆</h4>
+        <a href="naxi.html">纳西族馆</a><a href="mosuo.html">摩梭人专题</a><a href="yi.html">彝族馆</a><a href="lisu.html">傈僳族馆</a><a href="bai.html">白族馆</a><a href="pumi.html">普米族馆</a>
+      </div>
+      <div>
+        <h4>专题与说明</h4> <a href="heritage.html">三项世界遗产</a><a href="dongba.html">东巴文献全球地图</a><a href="glyphs.html">东巴文字谱</a><a href="gallery.html">三维展厅</a><a href="audio.html">语音导览</a><a href="timeline.html">大事年表</a><a href="resources.html">资源目录</a><a href="about.html">关于与方法论</a> </div>
+    </div>
+    <div class="foot-base"><span>© <span id="yr">2026</span> 积玉堆琼 · 丽江五族文化线上展馆</span><span>图片：Wikimedia Commons（逐图署名） · 数据时点：2026-10</span></div>
+  </div>
+</footer>
+
+<div id="lightbox"><button class="x" aria-label="关闭">×</button><button class="arr prev" aria-label="上一张">‹</button><img loading="lazy" alt=""><button class="arr next" aria-label="下一张">›</button><div class="cap"></div></div>
+<button id="top" aria-label="回到顶部">↑</button>
+<script src="assets/js/app.js"></script>
+</body>
+</html>

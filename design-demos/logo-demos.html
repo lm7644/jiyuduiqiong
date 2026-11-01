@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Logo 三方向初稿 · 金生丽水</title>
+<style>
+  :root {
+    --ink: #1c1a17; --paper: #f5f0e6; --gold: #b08d3e; --terra: #a8452e;
+    --serif: Georgia, "Times New Roman", "Noto Serif SC", "Songti SC", SimSun, serif;
+    --sans: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    --latin: "Segoe UI", Arial, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: var(--sans); background: var(--paper); color: var(--ink); line-height: 1.9; padding: 40px 24px 80px; }
+  .wrap { max-width: 1080px; margin: 0 auto; }
+  h1 { font-family: var(--serif); font-size: 30px; letter-spacing: 1px; }
+  .lead { color: #554e43; max-width: 40em; margin-top: 10px; font-size: 15px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 28px; margin-top: 36px; }
+  .demo { background: rgba(255,255,255,.45); border: 1px solid rgba(176,141,62,.35); border-radius: 6px; overflow: hidden; }
+  .demo .tag-no { font-family: var(--latin); font-size: 12px; letter-spacing: 3px; color: var(--gold); padding: 16px 20px 0; }
+  .demo h2 { font-family: var(--serif); font-size: 21px; padding: 4px 20px 0; letter-spacing: 0; }
+  .demo .pos { font-size: 13px; color: #554e43; padding: 6px 20px 0; }
+  /* 页头实景模拟 */
+  .bar-sim {
+    margin: 18px 20px 0; height: 66px; display: flex; align-items: center; gap: 12px;
+    background: rgba(245,240,230,.9); border: 1px solid rgba(176,141,62,.25); border-radius: 4px; padding: 0 14px;
+  }
+  .bar-sim .wm .n { font-family: var(--serif); font-size: 19px; font-weight: 700; letter-spacing: 3px; display: block; line-height: 1.2; }
+  .bar-sim .wm .s { font-family: var(--latin); font-size: 10px; letter-spacing: 2.5px; color: #5a5348; display: block; }
+  .zoom { margin: 14px 20px 0; display: flex; align-items: center; gap: 18px; background: rgba(28,26,23,.04); border-radius: 4px; padding: 16px; }
+  .zoom .z2 { transform: scale(2); transform-origin: left center; margin-right: 42px; }
+  .favs { display: flex; align-items: flex-end; gap: 14px; padding: 14px 20px 0; }
+  .favs figure { text-align: center; }
+  .favs figcaption { font-family: var(--latin); font-size: 11px; color: #8a8172; margin-top: 4px; }
+  .favs .f16 { width: 16px; height: 16px; } .favs .f32 { width: 32px; height: 32px; } .favs .f48 { width: 48px; height: 48px; }
+  .demo .note { font-size: 12.5px; color: #6b6459; padding: 12px 20px 18px; border-top: 1px dashed rgba(176,141,62,.35); margin-top: 16px; }
+  .demo .note b { color: var(--ink); }
+  .dark-sim { background: #241d14; border-radius: 8px; padding: 14px; display: inline-block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Logo · 三个方向</h1>
+  <p class="lead">印章方案两轮都没让你满意，这次不预设形式——三个方向分别取自站点叙事的三种来源：山水地理（徽章）、纳西文字（符号）、文学排印（字标）。每格都含：页头实景（40px 实际尺寸）· 两倍放大 · favicon 16/32/48 缩放测试。</p>
+
+  <div class="grid">
+    <!-- ============ 方向 A ============ -->
+    <div class="demo">
+      <div class="tag-no">DIRECTION A</div>
+      <h2>雪山与江湾 · 圆形徽章</h2>
+      <p class="pos">玉龙山影 + 金沙波纹 + 一轮金日，收进一枚深色圆徽——像国家公园的纪念碑章，庄重、有地理叙事。</p>
+      <div class="bar-sim">
+        <svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="30" fill="#241d14"/>
+          <circle cx="32" cy="32" r="27.5" fill="none" stroke="#b08d3e" stroke-width="1.1" opacity=".85"/>
+          <path d="M13 41 L23 25 L29.5 34.5 L36.5 22 L51 41" fill="none" stroke="#ead9b8" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+          <path d="M18 47.5 q3.5 -3 7 0 t7 0 t7 0 t7 0" fill="none" stroke="#b08d3e" stroke-width="1.8" stroke-linecap="round"/>
+          <path d="M22.5 52.5 q3 -2.4 6 0 t6 0 t6 0" fill="none" stroke="#b08d3e" stroke-width="1.4" stroke-linecap="round" opacity=".7"/>
+          <circle cx="45" cy="15.5" r="2.8" fill="#d9ae52"/>
+        </svg>
+        <span class="wm"><span class="n">金生丽水</span><span class="s">LIJIANG · FIVE PEOPLES</span></span>
+      </div>
+      <div class="zoom">
+        <span class="z2"><svg width="40" height="40" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#241d14"/><circle cx="32" cy="32" r="27.5" fill="none" stroke="#b08d3e" stroke-width="1.1" opacity=".85"/><path d="M13 41 L23 25 L29.5 34.5 L36.5 22 L51 41" fill="none" stroke="#ead9b8" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/><path d="M18 47.5 q3.5 -3 7 0 t7 0 t7 0 t7 0" fill="none" stroke="#b08d3e" stroke-width="1.8" stroke-linecap="round"/><path d="M22.5 52.5 q3 -2.4 6 0 t6 0 t6 0" fill="none" stroke="#b08d3e" stroke-width="1.4" stroke-linecap="round" opacity=".7"/><circle cx="45" cy="15.5" r="2.8" fill="#d9ae52"/></svg></span>
+        <span style="font-size:12.5px;color:#6b6459">两倍细节：山线一笔连写，波纹两叠，日点偏右上——「日出于金雪山，江流其间」。</span>
+      </div>
+      <div class="favs">
+        <figure><svg class="f16" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#241d14"/><path d="M13 41 L23 25 L29.5 34.5 L36.5 22 L51 41" fill="none" stroke="#ead9b8" stroke-width="2.5"/><path d="M18 47.5 q3.5 -3 7 0 t7 0 t7 0 t7 0" fill="none" stroke="#b08d3e" stroke-width="2.4"/></svg><figcaption>16px</figcaption></figure>
+        <figure><svg class="f32" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#241d14"/><circle cx="32" cy="32" r="27.5" fill="none" stroke="#b08d3e" stroke-width="1.1" opacity=".85"/><path d="M13 41 L23 25 L29.5 34.5 L36.5 22 L51 41" fill="none" stroke="#ead9b8" stroke-width="2"/><path d="M18 47.5 q3.5 -3 7 0 t7 0 t7 0 t7 0" fill="none" stroke="#b08d3e" stroke-width="1.8" stroke-linecap="round"/><circle cx="45" cy="15.5" r="2.8" fill="#d9ae52"/></svg><figcaption>32px</figcaption></figure>
+        <figure><svg class="f48" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#241d14"/><circle cx="32" cy="32" r="27.5" fill="none" stroke="#b08d3e" stroke-width="1.1" opacity=".85"/><path d="M13 41 L23 25 L29.5 34.5 L36.5 22 L51 41" fill="none" stroke="#ead9b8" stroke-width="2"/><path d="M18 47.5 q3.5 -3 7 0 t7 0 t7 0 t7 0" fill="none" stroke="#b08d3e" stroke-width="1.8" stroke-linecap="round"/><circle cx="45" cy="15.5" r="2.8" fill="#d9ae52"/></svg><figcaption>48px</figcaption></figure>
+      </div>
+      <p class="note"><b>依据</b>：站点的山河单元（玉龙/哈巴/金沙江）是全站叙事底座。<b>优点</b>：缩到 16px 仍可辨（深圆底对比强）；夜景/深色场景天然适配。<b>代价</b>：元素多，40px 下细节需要克制到刚好的笔画粗细。</p>
+    </div>
+
+    <!-- ============ 方向 B ============ -->
+    <div class="demo">
+      <div class="tag-no">DIRECTION B</div>
+      <h2>东巴日纹 · 以字为标</h2>
+      <p class="pos">直接用东巴文「日」（站内字谱同源字形）重绘为矢量标——世界上唯一活着的象形文字，本身就是最好的图形。</p>
+      <div class="bar-sim">
+        <svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true">
+          <circle cx="32" cy="32" r="8" fill="none" stroke="#a8452e" stroke-width="3.4"/>
+          <g stroke="#a8452e" stroke-width="4.6">
+            <line x1="32" y1="5.5" x2="32" y2="14.5"/>
+            <line x1="32" y1="49.5" x2="32" y2="58.5"/>
+            <line x1="5.5" y1="32" x2="14.5" y2="32"/>
+            <line x1="49.5" y1="32" x2="58.5" y2="32"/>
+            <line x1="13" y1="13" x2="19.6" y2="19.6"/>
+            <line x1="51" y1="13" x2="44.4" y2="19.6"/>
+            <line x1="13" y1="51" x2="19.6" y2="44.4"/>
+            <line x1="51" y1="51" x2="44.4" y2="44.4"/>
+          </g>
+        </svg>
+        <span class="wm"><span class="n">金生丽水</span><span class="s">LIJIANG · FIVE PEOPLES</span></span>
+      </div>
+      <div class="zoom">
+        <span class="z2"><svg width="40" height="40" viewBox="0 0 64 64"><circle cx="32" cy="32" r="8" fill="none" stroke="#a8452e" stroke-width="3.4"/><g stroke="#a8452e" stroke-width="4.6"><line x1="32" y1="5.5" x2="32" y2="14.5"/><line x1="32" y1="49.5" x2="32" y2="58.5"/><line x1="5.5" y1="32" x2="14.5" y2="32"/><line x1="49.5" y1="32" x2="58.5" y2="32"/><line x1="13" y1="13" x2="19.6" y2="19.6"/><line x1="51" y1="13" x2="44.4" y2="19.6"/><line x1="13" y1="51" x2="19.6" y2="44.4"/><line x1="51" y1="51" x2="44.4" y2="44.4"/></g></svg></span>
+        <span style="font-size:12.5px;color:#6b6459">两倍细节：中心圆环 + 八向短棒，方头笔画——严格对照 Commons 东巴「日」字形的骨架重绘。</span>
+      </div>
+      <div class="favs">
+        <figure><svg class="f16" viewBox="0 0 64 64"><circle cx="32" cy="32" r="8" fill="none" stroke="#a8452e" stroke-width="4.4"/><g stroke="#a8452e" stroke-width="6"><line x1="32" y1="4" x2="32" y2="15"/><line x1="32" y1="49" x2="32" y2="60"/><line x1="4" y1="32" x2="15" y2="32"/><line x1="49" y1="32" x2="60" y2="32"/></g></svg><figcaption>16px</figcaption></figure>
+        <figure><svg class="f32" viewBox="0 0 64 64"><circle cx="32" cy="32" r="8" fill="none" stroke="#a8452e" stroke-width="3.4"/><g stroke="#a8452e" stroke-width="4.6"><line x1="32" y1="5.5" x2="32" y2="14.5"/><line x1="32" y1="49.5" x2="32" y2="58.5"/><line x1="5.5" y1="32" x2="14.5" y2="32"/><line x1="49.5" y1="32" x2="58.5" y2="32"/><line x1="13" y1="13" x2="19.6" y2="19.6"/><line x1="51" y1="13" x2="44.4" y2="19.6"/><line x1="13" y1="51" x2="19.6" y2="44.4"/><line x1="51" y1="51" x2="44.4" y2="44.4"/></g></svg><figcaption>32px</figcaption></figure>
+        <figure><svg class="f48" viewBox="0 0 64 64"><circle cx="32" cy="32" r="8" fill="none" stroke="#a8452e" stroke-width="3.4"/><g stroke="#a8452e" stroke-width="4.6"><line x1="32" y1="5.5" x2="32" y2="14.5"/><line x1="32" y1="49.5" x2="32" y2="58.5"/><line x1="5.5" y1="32" x2="14.5" y2="32"/><line x1="49.5" y1="32" x2="58.5" y2="32"/><line x1="13" y1="13" x2="19.6" y2="19.6"/><line x1="51" y1="13" x2="44.4" y2="19.6"/><line x1="13" y1="51" x2="19.6" y2="44.4"/><line x1="51" y1="51" x2="44.4" y2="44.4"/></g></svg><figcaption>48px</figcaption></figure>
+      </div>
+      <p class="note"><b>依据</b>：东巴文是站点第一主角，「日」字形（Commons CC0 系列之 sun）与本站字谱页同源。<b>优点</b>：唯一性最强——「logo 是一个真实的东巴字」本身就是策展叙事；纯几何，16px 依然锐利。<b>代价</b>：远看可能近似车轮/齿轮（可通过辐条粗细调校规避）；红色主视觉比现在更强烈。</p>
+    </div>
+
+    <!-- ============ 方向 C ============ -->
+    <div class="demo">
+      <div class="tag-no">DIRECTION C</div>
+      <h2>金波 · 排印字标</h2>
+      <p class="pos">不要图形——「金生丽水」四个字本身就是标：首字鎏金，一条手写感的江波细线从字底流过。出版社式的克制。</p>
+      <div class="bar-sim" style="gap:8px">
+        <span style="display:inline-flex;flex-direction:column;align-items:center;line-height:1">
+          <span style="font-family:var(--serif);font-weight:700;font-size:21px;letter-spacing:3px;white-space:nowrap"><span style="color:#a8452e">金</span><span>生丽水</span></span>
+          <svg width="88" height="9" viewBox="0 0 120 12" style="margin-top:2px"><path d="M2 7 q7 -8 14 0 t14 0 t14 0 t14 0 t14 0 t14 0 t14 0" stroke="#b08d3e" fill="none" stroke-width="2.4" stroke-linecap="round"/></svg>
+        </span>
+        <span class="wm" style="margin-left:auto"><span class="s">LIJIANG · FIVE PEOPLES</span></span>
+      </div>
+      <div class="zoom" style="flex-direction:column;align-items:flex-start;gap:8px">
+        <span style="font-family:var(--serif);font-weight:700;font-size:44px;letter-spacing:5px;line-height:1;white-space:nowrap"><span style="color:#a8452e">金</span><span>生丽水</span></span>
+        <svg width="170" height="14" viewBox="0 0 120 12"><path d="M2 7 q7 -8 14 0 t14 0 t14 0 t14 0 t14 0 t14 0 t14 0" stroke="#b08d3e" fill="none" stroke-width="2.2" stroke-linecap="round"/></svg>
+      </div>
+      <div class="favs">
+        <figure><svg class="f16" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="8" fill="#241d14"/><text x="32" y="47" font-size="36" text-anchor="middle" fill="#d9ae52" font-family="Georgia,serif" font-weight="700">金</text></svg><figcaption>16px</figcaption></figure>
+        <figure><svg class="f32" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="8" fill="#241d14"/><text x="32" y="47" font-size="36" text-anchor="middle" fill="#d9ae52" font-family="Georgia,serif" font-weight="700">金</text></svg><figcaption>32px</figcaption></figure>
+        <figure><svg class="f48" viewBox="0 0 64 64"><rect x="2" y="2" width="60" height="60" rx="8" fill="#241d14"/><text x="32" y="47" font-size="36" text-anchor="middle" fill="#d9ae52" font-family="Georgia,serif" font-weight="700">金</text></svg><figcaption>48px</figcaption></figure>
+      </div>
+      <p class="note"><b>依据</b>：huashu 排印观——「字标是最诚实的 logo」，且站点气质是编辑部式的。<b>优点</b>：最不会出错的高级感；页头更轻。<b>代价</b>：favicon 只能回到「金」字方块（字形方案）；图形记忆点弱于 A/B。</p>
+    </div>
+  </div>
+
+  <p class="lead" style="margin-top:34px">选定后我会落到：页头站标（16 页）+ favicon（16 页）+ 页脚品牌印 + 三维展厅中央立柱贴图 + 移动端菜单，一次替换到位。</p>
+
+  <!-- ============ 融合定稿 ============ -->
+  <div style="margin-top:40px;background:rgba(255,255,255,.45);border:2px solid var(--gold);border-radius:6px;overflow:hidden">
+    <div class="tag-no" style="padding:18px 20px 0">FINAL · FUSION（A 形制 × B 符号 × C 字标）</div>
+    <h2 style="padding:4px 20px 0">融合定稿 · 深墨圆徽 × 金色东巴日纹 ×「江流有声」</h2>
+    <p class="pos" style="padding:6px 20px 0">三向融合：A 的圆形徽章形制收住画面，B 的东巴日纹为徽心（字即是标），C 的字标排印立在右侧。站名更定为<b>「江流有声」</b>（苏轼《后赤壁赋》「江流有声，断岸千尺」；丽江因金沙江得名，《元史·地理志》「路因江为名」）——江声即馆声。已于 v1.7 落地全站 16 页。</p>
+    <div class="bar-sim" style="margin-bottom:18px">
+      <svg width="40" height="40" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#241d14"/><circle cx="32" cy="32" r="27.5" fill="none" stroke="#b08d3e" stroke-width="1.1" opacity=".85"/><circle cx="32" cy="32" r="6.5" fill="none" stroke="#d9ae52" stroke-width="2.6"/><g stroke="#d9ae52" stroke-width="3.8"><line x1="32" y1="10" x2="32" y2="17.5"/><line x1="32" y1="46.5" x2="32" y2="54"/><line x1="10" y1="32" x2="17.5" y2="32"/><line x1="46.5" y1="32" x2="54" y2="32"/><line x1="16.4" y1="16.4" x2="21.8" y2="21.8"/><line x1="47.6" y1="16.4" x2="42.2" y2="21.8"/><line x1="16.4" y1="47.6" x2="21.8" y2="42.2"/><line x1="47.6" y1="47.6" x2="42.2" y2="42.2"/></g></svg>
+      <span class="wm"><span class="n">江流有声</span><span class="s">LIJIANG · FIVE PEOPLES</span></span>
+    </div>
+  </div>
+</div>
+</body>
+</html>

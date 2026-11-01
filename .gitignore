@@ -1,0 +1,16 @@
+# OS junk
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Local tooling (not part of the deployable site)
+_tools/
+*.log
+
+# Design process drafts (keep or remove as you prefer)
+# design-demos/

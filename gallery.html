@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#a8452e">
+<title>三维展厅 · 积玉堆琼</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23241d14'/%3E%3Ccircle cx='32' cy='32' r='27' fill='none' stroke='%23b08d3e' stroke-width='2' opacity='.85'/%3E%3Ccircle cx='32' cy='32' r='6.5' fill='none' stroke='%23d9ae52' stroke-width='3.4'/%3E%3Cg stroke='%23d9ae52' stroke-width='4.6'%3E%3Cline x1='32' y1='9' x2='32' y2='17'/%3E%3Cline x1='32' y1='47' x2='32' y2='55'/%3E%3Cline x1='9' y1='32' x2='17' y2='32'/%3E%3Cline x1='47' y1='32' x2='55' y2='32'/%3E%3Cline x1='14.8' y1='14.8' x2='20.6' y2='20.6'/%3E%3Cline x1='49.2' y1='14.8' x2='43.4' y2='20.6'/%3E%3Cline x1='14.8' y1='49.2' x2='20.6' y2='43.4'/%3E%3Cline x1='49.2' y1='49.2' x2='43.4' y2='43.4'/%3E%3C/g%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="积玉堆琼">
+<meta property="og:title" content="三维展厅 · 积玉堆琼">
+<meta property="og:description" content="一个可以在里面转着走的展厅：十六幅本站精选影像围成一圈，点击画作走近看。Three.js 实时渲染，无需插件；不支持的设备自动切换平面画廊。">
+<meta property="og:image" content="assets/img/hero-lijiang-snow.jpg">
+<meta name="description" content="Three.js 三维展厅：十六幅丽江五族影像围成一圈，点击走近细看。不支持 WebGL 时自动降级为平面画廊。">
+<link rel="stylesheet" href="assets/css/main.css">
+<style>
+  .gal-stage { position: relative; height: calc(100vh - 66px); height: calc(100dvh - 66px); min-height: 480px; background: #171310; overflow: hidden; }
+  #stage { position: absolute; inset: 0; }
+  #stage canvas { display: block; }
+  .gal-veil { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 42%, transparent 52%, rgba(10,8,6,.5) 100%); }
+  .gal-hud { position: absolute; left: 0; right: 0; bottom: 0; display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; padding: 18px 22px; pointer-events: none; }
+  .gal-hud .hint { font-family: var(--latin); font-size: 12px; letter-spacing: 3px; color: rgba(245,240,230,.55); text-transform: uppercase; pointer-events: none; }
+  .gal-hud .hint b { color: rgba(245,240,230,.85); font-weight: 600; }
+  .gal-btns { display: flex; gap: 10px; pointer-events: auto; }
+  .gal-btn {
+    background: rgba(23,19,16,.72); color: #f5f0e6; border: 1px solid rgba(245,240,230,.25); border-radius: 4px;
+    font-family: var(--sans); font-size: 13px; letter-spacing: 1px; padding: 9px 16px; cursor: pointer; min-height: 40px;
+    backdrop-filter: blur(6px); transition: border-color .2s, background .2s;
+  }
+  .gal-btn:hover { border-color: var(--gold); background: rgba(28,26,23,.85); }
+  .gal-cap {
+    position: absolute; top: 0; right: 0; bottom: 0; width: min(380px, 88vw); z-index: 5;
+    background: linear-gradient(270deg, rgba(20,17,13,.94), rgba(20,17,13,.86));
+    border-left: 1px solid rgba(176,141,62,.4); padding: 86px 30px 30px; transform: translateX(102%);
+    transition: transform .45s cubic-bezier(.2,.6,.2,1); overflow-y: auto;
+  }
+  .gal-cap.open { transform: translateX(0); }
+  .gal-cap .no { font-family: var(--latin); font-size: 12px; letter-spacing: 4px; color: var(--gold); }
+  .gal-cap h3 { font-family: var(--serif); font-size: 25px; color: #f5f0e6; letter-spacing: 0; margin-top: 10px; line-height: 1.5; }
+  .gal-cap p { font-size: 14px; color: rgba(245,240,230,.82); line-height: 1.95; margin-top: 14px; }
+  .gal-cap .cr { font-size: 12px; color: rgba(245,240,230,.55); margin-top: 16px; border-top: 1px solid rgba(245,240,230,.14); padding-top: 12px; }
+  .gal-cap .x { position: absolute; top: 16px; right: 16px; background: none; border: 1px solid rgba(245,240,230,.3); color: #f5f0e6; width: 40px; height: 40px; border-radius: 4px; font-size: 18px; cursor: pointer; }
+  .gal-cap .navrow { display: flex; gap: 10px; margin-top: 22px; }
+  .gal-cap .navrow .gal-btn { flex: 1; text-align: center; }
+  #galLoad { position: absolute; inset: 0; z-index: 8; background: #171310; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; color: #f5f0e6; transition: opacity .6s; }
+  #galLoad.hide { opacity: 0; pointer-events: none; }
+  #galLoad .t { font-family: var(--serif); font-size: 20px; letter-spacing: 6px; }
+  #galLoad .bar { width: 220px; height: 2px; background: rgba(245,240,230,.15); }
+  #galLoad .bar i { display: block; height: 100%; width: 0; background: var(--gold); transition: width .3s; }
+  #galFallback { display: none; padding: 56px 0; }
+  .gal-note { font-size: 13px; color: #6b6459; text-align: center; margin-top: 26px; }
+  @media (max-width: 640px) { .gal-stage { height: 70vh; } }
+</style>
+</head>
+<body data-theme="gold">
+<a class="skip" href="#galFallback">跳到平面画廊</a>
+<div id="progress"></div>
+
+<header class="site-head" style="position:relative;z-index:20">
+  <div class="wrap bar">
+    <a class="brand" href="index.html" aria-label="积玉堆琼 · 首页"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#241d14"/><circle cx="32" cy="32" r="27.5" fill="none" stroke="#b08d3e" stroke-width="1.1" opacity=".85"/><circle cx="32" cy="32" r="6.5" fill="none" stroke="#d9ae52" stroke-width="2.6"/><g stroke="#d9ae52" stroke-width="3.8"><line x1="32" y1="10" x2="32" y2="17.5"/><line x1="32" y1="46.5" x2="32" y2="54"/><line x1="10" y1="32" x2="17.5" y2="32"/><line x1="46.5" y1="32" x2="54" y2="32"/><line x1="16.4" y1="16.4" x2="21.8" y2="21.8"/><line x1="47.6" y1="16.4" x2="42.2" y2="21.8"/><line x1="16.4" y1="47.6" x2="21.8" y2="42.2"/><line x1="47.6" y1="47.6" x2="42.2" y2="42.2"/></g></svg><span><span class="name">积玉堆琼</span><span class="sub">Lijiang · Five Peoples</span></span></a>
+    <button id="menuBtn" aria-label="菜单"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke="currentColor"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav"><a href="naxi.html">纳西族</a><a href="mosuo.html">摩梭</a><a href="yi.html">彝族</a><a href="lisu.html">傈僳族</a><a href="bai.html">白族</a><a href="pumi.html">普米族</a><span class="nav-sep" aria-hidden="true"></span><div class="drop"><button type="button" class="drop-btn on" aria-haspopup="true" aria-expanded="false">专题<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button><div class="drop-menu"><a href="heritage.html">三项世界遗产</a><a href="dongba.html">东巴文献地图</a><a href="glyphs.html">东巴文字谱</a><a href="gallery.html" class="on">三维展厅</a><a href="audio.html">语音导览</a></div></div><span class="nav-sep" aria-hidden="true"></span><a href="timeline.html">年表</a><a href="resources.html">资源</a><a href="about.html">关于</a></nav>
+  </div>
+</header>
+
+<section class="gal-stage" id="galStage" aria-label="三维展厅，可拖动旋转、滚轮缩放">
+  <div id="stage"></div>
+  <div class="gal-veil"></div>
+  <div id="galLoad"><div class="t">开展布置中</div><div class="bar"><i id="galBar"></i></div><div style="font-size:12px;color:rgba(245,240,230,.55);letter-spacing:2px" id="galPct">0%</div></div>
+  <div class="gal-hud">
+    <div class="hint" id="galHint"><b>拖动</b> 环视 · <b>滚轮</b> 缩放 · <b>点击画作</b> 走近</div>
+    <div class="gal-btns">
+      <button class="gal-btn" id="galPrev" style="display:none">‹ 上一幅</button>
+      <button class="gal-btn" id="galNext" style="display:none">下一幅 ›</button>
+      <button class="gal-btn" id="galView" style="display:none">回到环视</button>
+    </div>
+  </div>
+  <aside class="gal-cap" id="galCap" aria-label="画作说明">
+    <button class="x" id="capClose" aria-label="关闭说明">×</button>
+    <div class="no" id="capNo"></div>
+    <h3 id="capTitle"></h3>
+    <p id="capDesc"></p>
+    <div class="cr" id="capCr"></div>
+    <div class="navrow">
+      <button class="gal-btn" id="capPrev">‹ 上一幅</button>
+      <button class="gal-btn" id="capNext">下一幅 ›</button>
+    </div>
+  </aside>
+</section>
+<p class="gal-note" id="galNote" style="display:none">当前以平面画廊模式浏览（三维渲染不可用时自动切换）。图片均可点击放大。</p>
+
+<section id="galFallback" class="block alt">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="zh">平面画廊</span></div>
+    <div class="figs grid2" id="flatGrid" style="grid-template-columns:repeat(auto-fill,minmax(260px,1fr));display:grid;gap:22px"></div>
+  </div>
+</section>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><svg class="seal-mini" width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#241d14"/><circle cx="32" cy="32" r="27" fill="none" stroke="#b08d3e" stroke-width="1.6" opacity=".8"/><circle cx="32" cy="32" r="6.5" fill="none" stroke="#d9ae52" stroke-width="3"/><g stroke="#d9ae52" stroke-width="4.2"><line x1="32" y1="10.5" x2="32" y2="17.5"/><line x1="32" y1="46.5" x2="32" y2="53.5"/><line x1="10.5" y1="32" x2="17.5" y2="32"/><line x1="46.5" y1="32" x2="53.5" y2="32"/><line x1="16.6" y1="16.6" x2="21.6" y2="21.6"/><line x1="47.4" y1="16.6" x2="42.4" y2="21.6"/><line x1="16.6" y1="47.4" x2="21.6" y2="42.4"/><line x1="47.4" y1="47.4" x2="42.4" y2="42.4"/></g></svg><p>积玉堆琼 · 丽江五族文化线上展馆——开放资料的人文整合。图片均来自 Wikimedia Commons 开放授权文件，逐图署名。</p></div>
+      <div><b>五族</b><br><a href="naxi.html">纳西族</a><a href="mosuo.html">摩梭人</a><a href="yi.html">彝族</a><a href="lisu.html">傈僳族</a><a href="bai.html">白族</a><a href="pumi.html">普米族</a></div>
+      <div><b>展馆</b><br><a href="heritage.html">三项世界遗产</a><a href="dongba.html">东巴文献全球地图</a><a href="glyphs.html">东巴文字谱</a><a href="gallery.html">三维展厅</a><a href="audio.html">语音导览</a><a href="timeline.html">大事年表</a><a href="resources.html">资源目录</a><a href="about.html">关于与方法论</a></div>
+    </div>
+    <div class="foot-base"><span>© <span id="yr">2026</span> 积玉堆琼 · 丽江五族文化线上展馆</span><span>图片：Wikimedia Commons（逐图署名） · 数据时点：2026-10</span></div>
+  </div>
+</footer>
+
+<div id="lightbox"><button class="x" aria-label="关闭">×</button><button class="arr prev" aria-label="上一张">‹</button><img loading="lazy" alt=""><button class="arr next" aria-label="下一张">›</button><div class="cap"></div></div>
+<button id="top" aria-label="回到顶部">↑</button>
+<script src="assets/js/app.js"></script>
+<script>
+/* 三维展厅数据（与平面画廊共用） */
+var ARTS = [
+  { img: 'dongba-manuscript-bulac.jpg', title: '东巴古籍', group: '东巴',
+    desc: '约三万册东巴经散藏十余国，2003 年入选《世界记忆名录》。这是正在被重新连接起来的书写传统。',
+    cr: '图：BULAC / CC0 / Wikimedia Commons' },
+  { img: 'dongba-priest.jpg', title: '东巴', group: '东巴',
+    desc: '集巫、医、艺、匠于一身的「智者」，东巴文化的活载体。',
+    cr: '图：Gary Todd / CC0 / Wikimedia Commons' },
+  { img: 'dongba-script-1.jpg', title: '东巴文字样', group: '东巴',
+    desc: '至今仍在仪式中使用的活形态象形文字。想认几个字？去「东巴文字谱」。',
+    cr: '图：BrokenSphere / CC BY-SA 3.0 / Wikimedia Commons' },
+  { img: 'dongba-glyphs-wall.jpg', title: '东巴文与汉字对照', group: '东巴',
+    desc: '丽江街头的文字墙——两种文字并排讲述同一座城。',
+    cr: '图：6-A04-W96-K38-S41-V38 / CC BY-SA 4.0 / Wikimedia Commons' },
+  { img: 'baisha-fresco-2.jpg', title: '白沙壁画（局部）', group: '纳西',
+    desc: '明代壁画，汉、藏、纳西艺术在同一面墙上相遇。全国重点文物保护单位。',
+    cr: '图：eric_ho / CC BY 3.0 / Wikimedia Commons' },
+  { img: 'naxi-architecture.jpg', title: '纳西民居', group: '纳西',
+    desc: '三坊一照壁、四合五天井——土木结构的丽江古城肌理。',
+    cr: '图：Brücke-Osteuropa / 公有领域 / Wikimedia Commons' },
+  { img: 'mosuo-matriarchal.jpg', title: '母系大家庭的日常', group: '摩梭',
+    desc: '泸沽湖畔，以母系血缘为纽带的家户生活。',
+    cr: '图：Rod Waddington / CC BY-SA 2.0 / Wikimedia Commons' },
+  { img: 'lugu-caohai.jpg', title: '泸沽湖草海', group: '摩梭',
+    desc: '高原湖泊的湿地部分，摩梭人猪槽船的家园。',
+    cr: '图：祝鱼贵 / CC BY-SA 4.0 / Wikimedia Commons' },
+  { img: 'yi-woman-lugu.jpg', title: '泸沽湖畔', group: '彝族',
+    desc: '小凉山彝族与泸沽湖的地理相邻，也是丽江彝区的真实构成。',
+    cr: '图：Zoharby / CC BY-SA 3.0 / Wikimedia Commons' },
+  { img: 'yi-headdress-historic.jpg', title: '百年前的彝族头饰', group: '彝族',
+    desc: '历史影像里的彝族盛装——方言、支系不同，头饰各成体系。',
+    cr: '图：公有领域 / Wikimedia Commons' },
+  { img: 'lisu-woman-voa.png', title: '傈僳族妇女', group: '傈僳',
+    desc: '历史影像。傈僳族是丽江人口第二大少数民族。',
+    cr: '图：美国之音（VOA）/ 公有领域 / Wikimedia Commons' },
+  { img: 'bai-woman-1.jpg', title: '白族妇女', group: '白族',
+    desc: '「风花雪月」的头饰语言属于大理，丽江的白族有自己的九河头巾。',
+    cr: '图：Rod Waddington / CC BY-SA 2.0 / Wikimedia Commons' },
+  { img: 'shuhe-bridge.jpg', title: '束河·青龙桥', group: '古城',
+    desc: '世界文化遗产丽江古城三大组成部分之一的束河，茶马古道上的石桥。',
+    cr: '图：Yumeto / CC BY-SA 4.0 / Wikimedia Commons' },
+  { img: 'tiger-leaping-gorge.jpg', title: '虎跳峡', group: '山河',
+    desc: '金沙江上最窄的握手——三江并流世界自然遗产的门户。',
+    cr: '图：xiquinhosilva / CC BY 2.0 / Wikimedia Commons' },
+  { img: 'hero-lijiang-snow.jpg', title: '丽江坝与玉龙雪山', group: '山河',
+    desc: '玉龙雪山下的坝子——纳西、汉、藏等族群共同居住的横断山走廊。',
+    cr: '图：chensiyuan / CC BY-SA 4.0 / Wikimedia Commons' },
+  { img: 'yulong-yak.jpg', title: '牦牛与雪山', group: '山河',
+    desc: '海拔抬升带来的牧业景观，也是氐羌系民族南下的历史线索。',
+    cr: '图：chensiyuan / CC BY-SA 4.0 / Wikimedia Commons' }
+];
+</script>
+<script>
+/* CDN/三维失败时的看门狗 + 平面画廊构建（也作为 noscript 内容） */
+(function () {
+  'use strict';
+  var flat = document.getElementById('flatGrid');
+  var built = false;
+  function buildFlat() {
+    if (built) return;
+    built = true;
+    ARTS.forEach(function (a) {
+      var fig = document.createElement('figure');
+      fig.className = 'fig';
+      var img = document.createElement('img');
+      img.src = 'assets/img/' + a.img;
+      img.alt = a.title;
+      img.loading = 'lazy';
+      fig.appendChild(img);
+      var cap = document.createElement('figcaption');
+      cap.innerHTML = '<b>' + a.title + '</b> ' + a.desc + ' · <span style="font-size:11.5px;color:#6b6459">' + a.cr + '</span>';
+      fig.appendChild(cap);
+      flat.appendChild(fig);
+    });
+  }
+  window.__galFlat = buildFlat;
+  window.__galFallback = function () {
+    buildFlat();
+    document.getElementById('galStage').style.display = 'none';
+    document.getElementById('galFallback').style.display = '';
+    document.getElementById('galNote').style.display = '';
+  };
+  setTimeout(function () { if (!window.__gal3d) window.__galFallback(); }, 4500);
+})();
+</script>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+} }
+</script>
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+window.__gal3d = true;
+try {
+  var stage = document.getElementById('stage');
+  var W = stage.clientWidth, H = stage.clientHeight;
+  var renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(W, H);
+  stage.appendChild(renderer.domElement);
+
+  var scene = new THREE.Scene();
+  scene.background = new THREE.Color(0x171310);
+  scene.fog = new THREE.Fog(0x171310, 14, 34);
+
+  var camera = new THREE.PerspectiveCamera(50, W / H, 0.1, 100);
+  var HOME_POS = new THREE.Vector3(0, 4.4, 16.5);
+  var HOME_TGT = new THREE.Vector3(0, 2.6, 0);
+  camera.position.set(0, 8.5, 24);
+
+  var controls = new OrbitControls(camera, renderer.domElement);
+  controls.target.copy(HOME_TGT);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.06;
+  controls.minDistance = 4;
+  controls.maxDistance = 21;
+  controls.maxPolarAngle = Math.PI * 0.55;
+  controls.enablePan = false;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  controls.autoRotate = !reduced;
+  controls.autoRotateSpeed = 0.45;
+
+  /* 光：暖调环境 + 环形射灯 */
+  scene.add(new THREE.AmbientLight(0xffe7c4, 0.55));
+  var hemi = new THREE.HemisphereLight(0xf5ead4, 0x201a14, 0.5);
+  scene.add(hemi);
+
+  /* 地面与环形墙 */
+  var floor = new THREE.Mesh(
+    new THREE.CircleGeometry(19, 64),
+    new THREE.MeshStandardMaterial({ color: 0x241d16, roughness: 0.55, metalness: 0.15 })
+  );
+  floor.rotation.x = -Math.PI / 2;
+  scene.add(floor);
+  var wall = new THREE.Mesh(
+    new THREE.CylinderGeometry(18.5, 18.5, 14, 64, 1, true),
+    new THREE.MeshStandardMaterial({ color: 0x2b231a, roughness: 0.9, metalness: 0, side: THREE.BackSide })
+  );
+  wall.position.y = 5;
+  scene.add(wall);
+  /* 顶环微光 */
+  var crownMat = new THREE.MeshBasicMaterial({ color: 0x84652f });
+  var crown = new THREE.Mesh(new THREE.TorusGeometry(6.4, 0.05, 8, 64), crownMat);
+  crown.rotation.x = Math.PI / 2;
+  crown.position.y = 7.6;
+  scene.add(crown);
+
+  /* 画作环形布置 */
+  var R = 13.4, CY = 2.7;
+  var loaderEl = document.getElementById('galLoad');
+  var barEl = document.getElementById('galBar');
+  var pctEl = document.getElementById('galPct');
+  var manager = new THREE.LoadingManager();
+  var texLoader = new THREE.TextureLoader(manager);
+  manager.onProgress = function (u, done, total) {
+    var p = Math.round(done / total * 100);
+    barEl.style.width = p + '%';
+    pctEl.textContent = p + '%';
+  };
+  manager.onLoad = function () {
+    loaderEl.classList.add('hide');
+    if (reduced) { camera.position.copy(HOME_POS); }
+  };
+
+  var artworks = [];
+  var arts = window.ARTS || [];
+  var count = arts.length;
+  var groupOf = { '东巴': 0xe8c86e, '纳西': 0x7f9cc0, '摩梭': 0x6fae9f, '彝族': 0xc0704f, '傈僳': 0xd08b52, '白族': 0x94a8cc, '古城': 0xb08d3e, '山河': 0x9aa08a };
+  var tmpImg = new Image();
+  var placeholders = arts.map(function () { return { w: 2.6, h: 1.8 }; });
+
+  arts.forEach(function (a, i) {
+    var angle = (i / count) * Math.PI * 2 - Math.PI / 2;
+    var x = Math.cos(angle) * R, z = Math.sin(angle) * R;
+    var group = new THREE.Group();
+    group.position.set(x, CY, z);
+    group.lookAt(0, CY, 0);
+
+    var frameMat = new THREE.MeshStandardMaterial({ color: 0x3a2c1c, roughness: 0.6, metalness: 0.25 });
+    var planeGeo = new THREE.PlaneGeometry(2.6, 1.8);
+    var artMat = new THREE.MeshBasicMaterial({ color: 0x2e2620 });
+    var plane = new THREE.Mesh(planeGeo, artMat);
+    plane.position.z = 0.061;
+
+    texLoader.load('assets/img/th/' + a.img.replace(/\.png$/, '.jpg'), function (tex) {
+      tex.colorSpace = THREE.SRGBColorSpace;
+      var im = tex.image;
+      var ratio = im.width / im.height;
+      var w = 2.6, h = w / ratio;
+      if (h > 3.1) { h = 3.1; w = h * ratio; }
+      plane.scale.set(w / 2.6, h / 1.8, 1);
+      var frame = new THREE.Mesh(new THREE.BoxGeometry(w + 0.26, h + 0.26, 0.12), frameMat);
+      frame.position.z = 0;
+      group.add(frame);
+      artMat.map = tex;
+      artMat.color.set(0xffffff);
+      artMat.needsUpdate = true;
+    });
+
+    group.add(plane);
+    /* 射灯 */
+    var spot = new THREE.SpotLight(0xffe2b8, 26, 26, 0.42, 0.55, 1.6);
+    spot.position.set(x * 0.42, 7.4, z * 0.42);
+    spot.target.position.set(x * 0.97, CY, z * 0.97);
+    scene.add(spot);
+    scene.add(spot.target);
+
+    group.userData = { index: i, data: a };
+    plane.userData = { index: i };
+    scene.add(group);
+    artworks.push(group);
+  });
+
+  /* 中央展台：一枚东巴字印章式立柱 */
+  var pillar = new THREE.Mesh(
+    new THREE.CylinderGeometry(0.55, 0.7, 1.15, 6),
+    new THREE.MeshStandardMaterial({ color: 0x8a4a30, roughness: 0.5, metalness: 0.1 })
+  );
+  pillar.position.y = 0.58;
+  scene.add(pillar);
+  var plinth = new THREE.Mesh(
+    new THREE.CylinderGeometry(1.05, 1.15, 0.16, 48),
+    new THREE.MeshStandardMaterial({ color: 0x4a3d2e, roughness: 0.7 })
+  );
+  plinth.position.y = 0.08;
+  scene.add(plinth);
+
+  /* 相机缓动 */
+  var tween = null;
+  function flyTo(pos, tgt, dur, done) {
+    var p0 = camera.position.clone(), t0 = controls.target.clone();
+    var start = performance.now();
+    controls.enabled = false;
+    tween = function (now) {
+      var k = Math.min((now - start) / dur, 1);
+      var e = 1 - Math.pow(1 - k, 3);
+      camera.position.lerpVectors(p0, pos, e);
+      controls.target.lerpVectors(t0, tgt, e);
+      if (k < 1) requestAnimationFrame(tween);
+      else { tween = null; controls.enabled = true; if (done) done(); }
+    };
+    requestAnimationFrame(tween);
+  }
+
+  /* 聚焦模式 */
+  var capEl = document.getElementById('galCap');
+  var focusIdx = -1;
+  function openArt(i) {
+    focusIdx = i;
+    var g = artworks[i];
+    var d = g.userData.data;
+    var num = String(i + 1).padStart(2, '0');
+    document.getElementById('capNo').textContent = num + ' · ' + d.group;
+    document.getElementById('capTitle').textContent = d.title;
+    document.getElementById('capDesc').textContent = d.desc;
+    document.getElementById('capCr').textContent = d.cr;
+    capEl.classList.add('open');
+    ['galPrev', 'galNext', 'galView'].forEach(function (id) { document.getElementById(id).style.display = ''; });
+    var dir = new THREE.Vector3(0, CY, 0).sub(g.position).normalize();
+    var camPos = g.position.clone().add(dir.multiplyScalar(6.4));
+    camPos.y = CY + 0.35;
+    controls.autoRotate = false;
+    flyTo(camPos, g.position.clone(), 900);
+  }
+  function closeArt() {
+    focusIdx = -1;
+    capEl.classList.remove('open');
+    ['galPrev', 'galNext', 'galView'].forEach(function (id) { document.getElementById(id).style.display = 'none'; });
+    if (!reduced) controls.autoRotate = true;
+    flyTo(HOME_POS.clone(), HOME_TGT.clone(), 950);
+  }
+  function step(dir) {
+    var n = (focusIdx + dir + artworks.length) % artworks.length;
+    openArt(n);
+  }
+  document.getElementById('capClose').addEventListener('click', closeArt);
+  document.getElementById('galView').addEventListener('click', closeArt);
+  document.getElementById('capPrev').addEventListener('click', function () { step(-1); });
+  document.getElementById('capNext').addEventListener('click', function () { step(1); });
+  document.getElementById('galPrev').addEventListener('click', function () { step(-1); });
+  document.getElementById('galNext').addEventListener('click', function () { step(1); });
+  document.addEventListener('keydown', function (e) {
+    if (focusIdx < 0) return;
+    if (e.key === 'Escape') closeArt();
+    if (e.key === 'ArrowRight') step(1);
+    if (e.key === 'ArrowLeft') step(-1);
+  });
+
+  /* 拾取点击 */
+  var ray = new THREE.Raycaster();
+  var ptr = new THREE.Vector2();
+  var downXY = null;
+  renderer.domElement.addEventListener('pointerdown', function (e) { downXY = [e.clientX, e.clientY]; });
+  renderer.domElement.addEventListener('pointerup', function (e) {
+    if (!downXY) return;
+    var moved = Math.hypot(e.clientX - downXY[0], e.clientY - downXY[1]);
+    downXY = null;
+    if (moved > 7) return;
+    var rect = renderer.domElement.getBoundingClientRect();
+    ptr.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    ptr.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
+    ray.setFromCamera(ptr, camera);
+    var hits = ray.intersectObjects(scene.children, true);
+    for (var h = 0; h < hits.length; h++) {
+      var o = hits[h].object;
+      while (o && o.userData.index === undefined) o = o.parent;
+      if (o && o.userData.index !== undefined) { openArt(o.userData.index); return; }
+    }
+  });
+
+  /* 入场 */
+  if (reduced) {
+    camera.position.copy(HOME_POS);
+    controls.update();
+  } else {
+    flyTo(HOME_POS.clone(), HOME_TGT.clone(), 1700);
+  }
+
+  window.addEventListener('resize', function () {
+    var w = stage.clientWidth, h = stage.clientHeight;
+    camera.aspect = w / h;
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h);
+  });
+
+  renderer.setAnimationLoop(function () {
+    controls.update();
+    renderer.render(scene, camera);
+  });
+
+  /* 调试/测试钩子（不参与渲染） */
+  window.__galInfo = function () {
+    var textured = 0;
+    artworks.forEach(function (g) {
+      g.children.forEach(function (c) { if (c.material && c.material.map) textured++; });
+    });
+    return {
+      artworks: artworks.length,
+      textured: textured,
+      focus: focusIdx,
+      cam: camera.position.toArray().map(function (v) { return Math.round(v * 10) / 10; })
+    };
+  };
+} catch (err) {
+  console.warn('3D gallery failed:', err);
+  if (window.__galFallback) window.__galFallback();
+}
+</script>
+</body>
+</html>

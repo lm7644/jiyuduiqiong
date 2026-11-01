@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#a8452e">
+<title>东巴文字谱 · 看图识字 · 积玉堆琼</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23241d14'/%3E%3Ccircle cx='32' cy='32' r='27' fill='none' stroke='%23b08d3e' stroke-width='2' opacity='.85'/%3E%3Ccircle cx='32' cy='32' r='6.5' fill='none' stroke='%23d9ae52' stroke-width='3.4'/%3E%3Cg stroke='%23d9ae52' stroke-width='4.6'%3E%3Cline x1='32' y1='9' x2='32' y2='17'/%3E%3Cline x1='32' y1='47' x2='32' y2='55'/%3E%3Cline x1='9' y1='32' x2='17' y2='32'/%3E%3Cline x1='47' y1='32' x2='55' y2='32'/%3E%3Cline x1='14.8' y1='14.8' x2='20.6' y2='20.6'/%3E%3Cline x1='49.2' y1='14.8' x2='43.4' y2='20.6'/%3E%3Cline x1='14.8' y1='49.2' x2='20.6' y2='43.4'/%3E%3Cline x1='49.2' y1='49.2' x2='43.4' y2='43.4'/%3E%3C/g%3E%3C/svg%3E">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="积玉堆琼">
+<meta property="og:title" content="东巴文字谱 · 看图识字 · 积玉堆琼">
+<meta property="og:description" content="十三个经核实的东巴文常用字——天、日、月、星、雨、虹、电、风、雪、露……看图识字、猜字闯关，附谐音借字与雪山之名。字形来自 Wikimedia Commons 开放授权系列。">
+<meta property="og:image" content="assets/img/dongba-glyphs-wall.jpg">
+<meta name="description" content="十三个经核实的东巴文常用字：看图识字 + 猜字闯关 + 谐音借字 + 东巴文雪山名。字形逐图署名（CC0 / CC BY-SA）。">
+<link rel="stylesheet" href="assets/css/main.css">
+<style>
+  .glyph-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 18px; }
+  .gcard {
+    display: block; width: 100%; font: inherit;
+    background: rgba(245,240,230,.65); border: 1px solid rgba(176,141,62,.38); border-radius: 4px;
+    padding: 18px 12px 14px; text-align: center; cursor: pointer; position: relative;
+    transition: transform .25s, box-shadow .25s, border-color .25s; min-height: 150px;
+  }
+  .gcard:hover, .gcard:focus-visible { transform: translateY(-4px); box-shadow: 0 14px 34px rgba(28,26,23,.13); border-color: var(--gold); outline: none; }
+  .gcard img { width: 74px; height: 74px; object-fit: contain; filter: drop-shadow(0 2px 5px rgba(28,26,23,.14)); }
+  .gcard .g-zh { font-family: var(--serif); font-size: 19px; font-weight: 700; color: var(--ink); margin-top: 10px; letter-spacing: 0; }
+  .gcard .g-en { font-family: var(--latin); font-size: 12px; letter-spacing: 2.5px; text-transform: uppercase; color: #6b6459; margin-top: 3px; }
+  .gcard .g-dom { position: absolute; top: 8px; left: 8px; font-size: 12px; color: var(--gold); letter-spacing: 1px; }
+  .g-modal { position: fixed; inset: 0; background: rgba(20,18,15,.78); z-index: 90; display: none; align-items: center; justify-content: center; padding: 22px; }
+  .g-modal.open { display: flex; }
+  .g-modal .panel {
+    background: var(--paper); border: 1px solid rgba(176,141,62,.5); border-radius: 6px; max-width: 430px; width: 100%;
+    padding: 34px 34px 26px; position: relative; text-align: center; box-shadow: 0 30px 80px rgba(0,0,0,.4);
+  }
+  .g-modal .panel img { width: 172px; height: 172px; object-fit: contain; margin: 0 auto; display: block; }
+  .g-modal h3 { font-family: var(--serif); font-size: 30px; letter-spacing: 0; color: var(--ink); margin-top: 16px; }
+  .g-modal h3 small { font-family: var(--latin); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #6b6459; display: block; margin-top: 6px; font-weight: 400; }
+  .g-modal p { font-size: 14.5px; color: var(--ink-2); line-height: 1.9; margin-top: 14px; text-align: left; }
+  .g-modal .src { font-size: 12px; color: #6b6459; margin-top: 14px; border-top: 1px dashed rgba(176,141,62,.45); padding-top: 12px; text-align: left; }
+  .g-modal .x { position: absolute; top: 10px; right: 12px; background: none; border: none; font-size: 26px; color: #6b6459; cursor: pointer; width: 44px; height: 44px; line-height: 1; }
+  .g-modal .x:hover { color: var(--ink); }
+  .speak-btn {
+    display: inline-flex; align-items: center; gap: 7px; background: rgba(168,69,46,.08); color: var(--terra);
+    border: 1px solid rgba(168,69,46,.35); border-radius: 999px; padding: 7px 16px; font-size: 13px; letter-spacing: 2px;
+    cursor: pointer; margin-top: 16px; min-height: 36px; font-family: var(--sans);
+  }
+  .speak-btn:hover { background: rgba(168,69,46,.16); }
+  .speak-btn svg { width: 15px; height: 15px; }
+  .rebus { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 22px; }
+  .rebus .rb { background: rgba(245,240,230,.65); border: 1px solid rgba(176,141,62,.35); border-left: 3px solid var(--terra); border-radius: 4px; padding: 20px 22px; }
+  .rebus .rb .f { font-family: var(--serif); font-size: 20px; font-weight: 700; color: var(--ink); letter-spacing: 0; }
+  .rebus .rb .f em { font-style: normal; color: var(--terra); font-size: 15px; margin: 0 4px; }
+  .rebus .rb .d { font-size: 14px; color: var(--ink-2); line-height: 1.95; margin-top: 9px; }
+  /* quiz */
+  .quiz-box { background: rgba(28,26,23,.035); border: 1px solid rgba(176,141,62,.4); border-radius: 6px; padding: clamp(24px, 4vw, 44px); text-align: center; }
+  .quiz-box .q-glyph { width: 150px; height: 150px; object-fit: contain; margin: 6px auto 10px; display: block; }
+  .quiz-opts { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; max-width: 640px; margin: 14px auto 0; }
+  .quiz-opts button {
+    font-family: var(--serif); font-size: 18px; letter-spacing: 2px; color: var(--ink); background: var(--paper);
+    border: 1px solid rgba(176,141,62,.5); border-radius: 4px; padding: 13px 8px; cursor: pointer; min-height: 52px; transition: background .2s, border-color .2s;
+  }
+  .quiz-opts button:hover:not(:disabled) { border-color: var(--terra); background: rgba(168,69,46,.06); }
+  .quiz-opts button.ok { background: rgba(51,96,79,.14); border-color: var(--jade); color: var(--jade); font-weight: 700; }
+  .quiz-opts button.no { background: rgba(168,69,46,.12); border-color: var(--terra); color: var(--terra); }
+  .quiz-meta { font-family: var(--latin); font-size: 12px; letter-spacing: 3px; color: #6b6459; margin-top: 18px; }
+  .quiz-start { font-family: var(--serif); font-size: 17px; letter-spacing: 3px; color: var(--paper); background: var(--ink); border: none; border-radius: 4px; padding: 14px 34px; cursor: pointer; min-height: 48px; }
+  .quiz-start:hover { background: var(--terra); }
+  .q-score { font-family: var(--serif); font-size: 44px; color: var(--terra); font-variant-numeric: tabular-nums; }
+  .note-box { background: rgba(176,141,62,.07); border: 1px dashed rgba(176,141,62,.5); border-radius: 4px; padding: 18px 22px; font-size: 13.5px; color: #554e43; line-height: 1.95; }
+  .mtn { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 26px; align-items: start; }
+</style>
+</head>
+<body data-theme="gold">
+<a class="skip" href="#content">跳到正文</a>
+<div id="progress"></div>
+
+<header class="site-head">
+  <div class="wrap bar">
+    <a class="brand" href="index.html" aria-label="积玉堆琼 · 首页"><svg width="40" height="40" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#241d14"/><circle cx="32" cy="32" r="27.5" fill="none" stroke="#b08d3e" stroke-width="1.1" opacity=".85"/><circle cx="32" cy="32" r="6.5" fill="none" stroke="#d9ae52" stroke-width="2.6"/><g stroke="#d9ae52" stroke-width="3.8"><line x1="32" y1="10" x2="32" y2="17.5"/><line x1="32" y1="46.5" x2="32" y2="54"/><line x1="10" y1="32" x2="17.5" y2="32"/><line x1="46.5" y1="32" x2="54" y2="32"/><line x1="16.4" y1="16.4" x2="21.8" y2="21.8"/><line x1="47.6" y1="16.4" x2="42.2" y2="21.8"/><line x1="16.4" y1="47.6" x2="21.8" y2="42.2"/><line x1="47.6" y1="47.6" x2="42.2" y2="42.2"/></g></svg><span><span class="name">积玉堆琼</span><span class="sub">Lijiang · Five Peoples</span></span></a>
+    <button id="menuBtn" aria-label="菜单"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke="currentColor"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    <nav class="nav" id="nav"><a href="naxi.html">纳西族</a><a href="mosuo.html">摩梭</a><a href="yi.html">彝族</a><a href="lisu.html">傈僳族</a><a href="bai.html">白族</a><a href="pumi.html">普米族</a><span class="nav-sep" aria-hidden="true"></span><div class="drop"><button type="button" class="drop-btn on" aria-haspopup="true" aria-expanded="false">专题<svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button><div class="drop-menu"><a href="heritage.html">三项世界遗产</a><a href="dongba.html">东巴文献地图</a><a href="glyphs.html" class="on">东巴文字谱</a><a href="gallery.html">三维展厅</a><a href="audio.html">语音导览</a></div></div><span class="nav-sep" aria-hidden="true"></span><a href="timeline.html">年表</a><a href="resources.html">资源</a><a href="about.html">关于</a></nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="bg" style="background-image:url('assets/img/dongba-glyphs-wall.jpg')"></div>
+  <div class="veil"></div>
+  <div class="inner wrap">
+    <p class="crumb">Dongba Glyphs · 互动识字</p>
+    <h1>东巴文字谱<small>看图识字 · 猜字闯关 · 谐音借字</small></h1>
+  </div>
+</section>
+
+<section id="content" class="block" style="padding-top:46px">
+  <div class="wrap">
+    <p class="lead-p rv">东巴文，纳西语称「<b>森究</b>」（木上的痕迹）、「<b>鲁究</b>」（石上的痕迹），是至今仍在宗教仪式中使用的活形态象形文字，2003 年随东巴古籍入选联合国教科文组织《世界记忆名录》。本页收录 <b>13 个经核实的常用字</b>——字形与释义均来自开放授权的公开来源，逐图署名，可放心放大细看。</p>
+    <div class="note-box rv" style="margin-top:24px">读音说明：东巴文一字多音、多义，各地写法与读音差异很大。本页<b>不标注逐字读音</b>——那需要《纳西象形文字谱》等工具书；页面上的「朗读」按钮读的是普通话释义，不是纳西语。</div>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="wrap" style="position:relative">
+    <span class="side-mark">看图识字</span>
+    <div class="sec-head rv"><span class="zh">十三个常用字</span></div>
+    <div class="res-filter rv" style="margin-bottom:26px" role="group" aria-label="按义类筛选">
+      <button class="chip on" data-gdom="all">全部</button>
+      <button class="chip" data-gdom="sky">天穹</button>
+      <button class="chip" data-gdom="storm">风雨</button>
+      <button class="chip" data-gdom="frost">霜露</button>
+    </div>
+    <div class="glyph-grid rv" id="glyphGrid"></div>
+    <p class="rv" style="font-size:13px;color:#6b6459;margin-top:18px">点卡片看大图与出处；卡片上的小喇叭朗读普通话释义。</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap" style="position:relative">
+    <span class="side-mark">音同借字</span>
+    <div class="sec-head rv"><span class="zh">画不出来就「借音」</span></div>
+    <p class="rv" style="max-width:38em;font-size:15px;color:var(--ink-2);margin-bottom:26px">抽象概念画不出图，东巴就借同音的字代写——如同汉字的假借。以下三例均出自英文维基百科 Dongba symbols 词条（CC BY-SA）：</p>
+    <div class="rebus rv">
+      <div class="rb"><div class="f">眼 <em>myə³</em> 命</div><div class="d">「命」画不出来，就画一只眼睛——「眼」与「命」在纳西语里同音（myə³）。经书中眼睛符号常指命运、寿命。</div></div>
+      <div class="rb"><div class="f">碗 <em>xa²</em> 食 · 睡</div><div class="d">木碗的「碗」（xa²）与「食物」同音，又引申「睡觉」（吃与睡同词根 xa²）——一只碗，读出三件事。</div></div>
+      <div class="rb"><div class="f">斑羚 <em>se³</em> 助词</div><div class="d">语法助词最难画。纳西语的助词 se³ 与「斑羚」同音——经书里画一只小羚羊，表示动作已完成。</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="wrap" style="position:relative">
+    <span class="side-mark">雪山之名</span>
+    <div class="sec-head rv"><span class="zh">两座雪山的东巴名字</span></div>
+    <div class="mtn rv">
+      <figure class="fig">
+        <img src="assets/img/tomba-yulong.png" alt="东巴文书写的玉龙雪山" loading="lazy">
+        <figcaption><b>玉龙雪山</b> · 临摹自云南科技出版社《跟我学说纳西话》 · Zhangmoon618 / CC BY-SA 4.0 / Wikimedia Commons</figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="assets/img/tomba-haba.png" alt="东巴文书写的哈巴雪山" loading="lazy">
+        <figcaption><b>哈巴雪山</b> · 临摹自哈巴雪山观景台石碑文字 · Zhangmoon618 / CC BY-SA 4.0 / Wikimedia Commons</figcaption>
+      </figure>
+    </div>
+    <p class="rv" style="font-size:14px;color:var(--ink-2);margin-top:22px;max-width:38em">两幅字均由维基贡献者 Zhangmoon618 从出版物与碑刻临摹上传。对比着看：同一座雪山，笔画比字谱里的单字更「手写」——东巴文从来不是印刷体，每个东巴笔下都有自己的山。</p>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap" style="position:relative">
+    <span class="side-mark">文字上街</span>
+    <div class="sec-head rv"><span class="zh">街头的东巴文</span></div>
+    <div class="mtn rv">
+      <figure class="fig">
+        <img src="assets/img/dongba-signs.jpg" alt="丽江旅游路牌：东巴文、汉字与英文并书" loading="lazy">
+        <figcaption><b>指路牌上的东巴文</b>（丽江）——东巴万神园、玉水寨、玉峰寺、玉龙雪山…… · 6-A04-W96-K38-S41-V38 / CC BY-SA 4.0 / Wikimedia Commons</figcaption>
+      </figure>
+      <figure class="fig">
+        <img src="assets/img/trilingual-sign.jpg" alt="三种文字并书的标识" loading="lazy">
+        <figcaption><b>汉字 · 东巴文 · 英文</b>三语并书的公共标识——文字活在生活里，不只活在经书里</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<section class="block alt">
+  <div class="wrap" style="position:relative">
+    <span class="side-mark">猜字闯关</span>
+    <div class="sec-head rv"><span class="zh">考考你</span></div>
+    <div class="quiz-box rv" id="quizBox">
+      <p id="quizLead" style="font-size:15px;color:var(--ink-2);max-width:34em;margin:0 auto 20px">十道题，每题一个字、四个义项。猜完不算完——去上面的字谱里翻翻它的「亲戚」。</p>
+      <button class="quiz-start" id="quizStart">开始闯关</button>
+      <div id="quizPlay" style="display:none">
+        <img class="q-glyph" id="qImg" src="" alt="待猜的东巴文字形">
+        <p id="qAfter" style="font-size:15px;color:var(--ink-2);min-height:24px;margin-top:4px"></p>
+        <div class="quiz-opts" id="qOpts"></div>
+        <p class="quiz-meta" id="qMeta"></p>
+      </div>
+      <div id="quizDone" style="display:none">
+        <div class="q-score" id="qFinal"></div>
+        <p id="qVerdict" style="font-size:15px;color:var(--ink-2);margin-top:8px"></p>
+        <button class="quiz-start" id="quizAgain" style="margin-top:18px">再来一轮</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head rv"><span class="zh">这一页的数据从哪来</span></div>
+    <div class="entries rv">
+      <div class="entry"><div class="term">字形 <span class="tag">Wikimedia Commons</span></div><div class="def">13 个单字出自 Commons「Dongba symbols」开放系列，作者 Immanuel Giel（其中「闪电」为 Aromatic 上传、公有领域）；两幅雪山名作者 Zhangmoon618；路牌照片作者 6-A04-W96-K38-S41-V38。除标注 CC0 / 公有领域者外，其余为 CC BY-SA 4.0，本页逐图署名并附原词条链接（见大图弹层）。</div></div>
+      <div class="entry"><div class="term">释义与借字 <span class="tag">Wikipedia</span></div><div class="def">单字释义即 Commons 文件名所示的通行英译（sky、rain、dew……）；「借音三例」（myə³ / xa² / se³）出自英文维基百科 <a class="cite" href="https://en.wikipedia.org/wiki/Dongba_symbols" target="_blank" rel="noopener">Dongba symbols</a> 词条（CC BY-SA 4.0）。词条未给逐字纳西读音，故本页从缺。</div></div>
+      <div class="entry"><div class="term">没收录什么 <span class="tag">诚实清单</span></div><div class="def">全量字汇（1,400+）需查方国瑜《纳西象形文字谱》与李霖灿《纳西族象形标音文字字典》两部工具书，其电子版无开放授权，本页不以截图书录。BabelStone Naxi LLC 字体覆盖 2,162 字形但未附再分发许可，本站不内嵌其字体文件，仅于<a class="cite" href="resources.html">资源目录</a>给出官方链接。</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="g-modal" id="gModal" role="dialog" aria-modal="true" aria-label="字形详情">
+  <div class="panel">
+    <button class="x" aria-label="关闭">&times;</button>
+    <img id="gmImg" src="" alt="">
+    <h3 id="gmZh"></h3>
+    <p id="gmDesc"></p>
+    <p class="src" id="gmSrc"></p>
+    <button class="speak-btn" id="gmSpeak"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M11 5 6 9H3v6h3l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7M18.4 5.6a9 9 0 0 1 0 12.8"/></svg><span>朗读释义</span></button>
+  </div>
+</div>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div><svg class="seal-mini" width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="30" fill="#241d14"/><circle cx="32" cy="32" r="27" fill="none" stroke="#b08d3e" stroke-width="1.6" opacity=".8"/><circle cx="32" cy="32" r="6.5" fill="none" stroke="#d9ae52" stroke-width="3"/><g stroke="#d9ae52" stroke-width="4.2"><line x1="32" y1="10.5" x2="32" y2="17.5"/><line x1="32" y1="46.5" x2="32" y2="53.5"/><line x1="10.5" y1="32" x2="17.5" y2="32"/><line x1="46.5" y1="32" x2="53.5" y2="32"/><line x1="16.6" y1="16.6" x2="21.6" y2="21.6"/><line x1="47.4" y1="16.6" x2="42.4" y2="21.6"/><line x1="16.6" y1="47.4" x2="21.6" y2="42.4"/><line x1="47.4" y1="47.4" x2="42.4" y2="42.4"/></g></svg><p>积玉堆琼 · 丽江五族文化线上展馆——开放资料的人文整合。图片均来自 Wikimedia Commons 开放授权文件，逐图署名。</p></div>
+      <div><b>五族</b><br><a href="naxi.html">纳西族</a><a href="mosuo.html">摩梭人</a><a href="yi.html">彝族</a><a href="lisu.html">傈僳族</a><a href="bai.html">白族</a><a href="pumi.html">普米族</a></div>
+      <div><b>展馆</b><br><a href="heritage.html">三项世界遗产</a><a href="dongba.html">东巴文献全球地图</a><a href="glyphs.html">东巴文字谱</a><a href="gallery.html">三维展厅</a><a href="audio.html">语音导览</a><a href="timeline.html">大事年表</a><a href="resources.html">资源目录</a><a href="about.html">关于与方法论</a></div>
+    </div>
+    <div class="foot-base"><span>© <span id="yr">2026</span> 积玉堆琼 · 丽江五族文化线上展馆</span><span>图片：Wikimedia Commons（逐图署名） · 数据时点：2026-10</span></div>
+  </div>
+</footer>
+
+<div id="lightbox"><button class="x" aria-label="关闭">×</button><button class="arr prev" aria-label="上一张">‹</button><img loading="lazy" alt=""><button class="arr next" aria-label="下一张">›</button><div class="cap"></div></div>
+<button id="top" aria-label="回到顶部">↑</button>
+<script src="assets/js/app.js"></script>
+<script>
+(function () {
+  'use strict';
+  var COMMONS = 'https://commons.wikimedia.org/wiki/';
+  var GLYPHS = [
+    { id: 'sky', zh: '天', en: 'sky', dom: 'sky', file: 'glyph-sky.png', lic: 'CC0', artist: 'Immanuel Giel',
+      desc: '头顶的穹隆。东巴经起笔常自天地始——天为父、地为母，是字谱的第一课。' },
+    { id: 'sun', zh: '日', en: 'sun', dom: 'sky', file: 'glyph-sun.png', lic: 'CC0', artist: 'Immanuel Giel',
+      desc: '太阳。圆轮之形，「日」与「天」的组合能写出「白昼」「晴天」。' },
+    { id: 'moon', zh: '月', en: 'moon', dom: 'sky', file: 'glyph-moon.png', lic: 'CC0', artist: 'Immanuel Giel',
+      desc: '月亮。与「日」相对；月相的循环也是东巴历法「月」的来历。' },
+    { id: 'star', zh: '星', en: 'star', dom: 'sky', file: 'glyph-star.png', lic: 'CC0', artist: 'Immanuel Giel',
+      desc: '星辰。点点如火光之形，经书里也用来写「闪烁」「繁多」。' },
+    { id: 'bright', zh: '亮', en: 'bright', dom: 'sky', file: 'glyph-bright.png', lic: 'CC0', artist: 'Immanuel Giel',
+      desc: '光明、明亮。日光之下，万物可辨——「亮」是东巴经里出现频率最高的字之一。' },
+    { id: 'month', zh: '月（月份）', en: 'month', dom: 'sky', file: 'glyph-month.png', lic: 'CC BY-SA 4.0', artist: 'Immanuel Giel',
+      desc: '时间之「月」。天上的月与历法的月共用一个字源，看笔画就能想见月牙。' },
+    { id: 'cloud', zh: '云', en: 'cloud', dom: 'storm', file: 'glyph-cloud.png', lic: 'CC BY-SA 4.0', artist: 'Immanuel Giel',
+      desc: '云气之形。玉龙雪山头上的那朵云，东巴几笔就画成了字。' },
+    { id: 'rain', zh: '雨', en: 'rain', dom: 'storm', file: 'glyph-rain.png', lic: 'CC BY-SA 4.0', artist: 'Immanuel Giel',
+      desc: '雨天落点之形。丽江的雨季一来就是几个月——这个字很常用。' },
+    { id: 'rainbow', zh: '虹', en: 'rainbow', dom: 'storm', file: 'glyph-rainbow.png', lic: 'CC BY-SA 4.0', artist: 'Immanuel Giel',
+      desc: '彩虹。雨后横跨两山的一道弧，纳西传说里虹有神性。' },
+    { id: 'lightning', zh: '电（闪电）', en: 'lightning', dom: 'storm', file: 'glyph-lightning.png', lic: '公有领域', artist: 'Aromatic',
+      desc: '闪电。屈曲如枝的笔画直接取形于雷雨夜的天空。' },
+    { id: 'wind', zh: '风', en: 'wind', dom: 'storm', file: 'glyph-wind.png', lic: 'CC BY-SA 4.0', artist: 'Immanuel Giel',
+      desc: '风气流动无形，东巴以气流回旋之形写之。' },
+    { id: 'snow', zh: '雪', en: 'snow', dom: 'frost', file: 'glyph-snow.png', lic: 'CC BY-SA 4.0', artist: 'Immanuel Giel',
+      desc: '雪。丽江坝少见、玉龙山常见的白色——雪山之名里就有它。' },
+    { id: 'dew', zh: '露', en: 'dew', dom: 'frost', file: 'glyph-dew.png', lic: 'CC BY-SA 4.0', artist: 'Immanuel Giel',
+      desc: '露水。清晨草叶上的水珠，凝结成字谱里最轻盈的字。' }
+  ];
+  var domName = { sky: '天穹', storm: '风雨', frost: '霜露' };
+
+  var grid = document.getElementById('glyphGrid');
+  var modal = document.getElementById('gModal');
+
+  function srcLine(g) {
+    var f = 'File:Dongba symbol for "' + g.en + '".png';
+    var url = COMMONS + encodeURIComponent(f.replace(/ /g, '_')).replace(/%22/g, '%22');
+    return '字形：' + g.artist + ' / ' + g.lic + ' / <a href="' + url + '" target="_blank" rel="noopener">Commons 原文件</a>';
+  }
+
+  GLYPHS.forEach(function (g) {
+    var card = document.createElement('button');
+    card.className = 'gcard';
+    card.type = 'button';
+    card.setAttribute('data-dom', g.dom);
+    card.innerHTML = '<span class="g-dom">' + (domName[g.dom] || '') + '</span>' +
+      '<img src="assets/img/' + g.file + '" alt="东巴文「' + g.zh + '」的字形" loading="lazy">' +
+      '<div class="g-zh">' + g.zh + '</div><div class="g-en">' + g.en + '</div>';
+    card.addEventListener('click', function () { openModal(g); });
+    grid.appendChild(card);
+  });
+
+  var current = null;
+  function openModal(g) {
+    current = g;
+    document.getElementById('gmImg').src = 'assets/img/' + g.file;
+    document.getElementById('gmImg').alt = '东巴文「' + g.zh + '」的字形';
+    document.getElementById('gmZh').innerHTML = g.zh + '<small>' + g.en + ' · ' + (domName[g.dom] || '') + '</small>';
+    document.getElementById('gmDesc').textContent = g.desc;
+    document.getElementById('gmSrc').innerHTML = srcLine(g);
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() { modal.classList.remove('open'); document.body.style.overflow = ''; }
+  modal.querySelector('.x').addEventListener('click', closeModal);
+  modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && modal.classList.contains('open')) closeModal(); });
+
+  document.getElementById('gmSpeak').addEventListener('click', function () {
+    if (current && window.speakZh) window.speakZh('东巴文，' + current.zh + '。' + current.desc);
+  });
+
+  /* —— 义类筛选 —— */
+  var gchips = document.querySelectorAll('[data-gdom]');
+  gchips.forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      gchips.forEach(function (c) { c.classList.remove('on'); });
+      chip.classList.add('on');
+      var d = chip.getAttribute('data-gdom');
+      grid.querySelectorAll('.gcard').forEach(function (card) {
+        card.style.display = (d === 'all' || card.getAttribute('data-dom') === d) ? '' : 'none';
+      });
+    });
+  });
+
+  /* —— 猜字闯关 —— */
+  var ORDER = [], qi = 0, score = 0, locked = false;
+  var qImg = document.getElementById('qImg'), qOpts = document.getElementById('qOpts'),
+      qMeta = document.getElementById('qMeta'), qAfter = document.getElementById('qAfter');
+  function shuffle(a) { for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; }
+  function startQuiz() {
+    ORDER = shuffle(GLYPHS.slice()).slice(0, 10);
+    qi = 0; score = 0;
+    document.getElementById('quizLead').style.display = 'none';
+    document.getElementById('quizStart').style.display = 'none';
+    document.getElementById('quizDone').style.display = 'none';
+    document.getElementById('quizPlay').style.display = '';
+    nextQ();
+  }
+  function nextQ() {
+    if (qi >= ORDER.length) { finishQuiz(); return; }
+    locked = false;
+    var g = ORDER[qi];
+    qImg.src = 'assets/img/' + g.file;
+    qImg.alt = '第' + (qi + 1) + '题的东巴文字形';
+    qAfter.textContent = '';
+    var others = shuffle(GLYPHS.filter(function (o) { return o.id !== g.id; })).slice(0, 3);
+    var opts = shuffle([g].concat(others));
+    qOpts.innerHTML = '';
+    opts.forEach(function (o) {
+      var b = document.createElement('button');
+      b.textContent = o.zh;
+      b.addEventListener('click', function () {
+        if (locked) return;
+        locked = true;
+        if (o.id === g.id) {
+          b.classList.add('ok'); score++;
+          qAfter.textContent = '答对了——' + g.desc;
+          if (window.speakZh) window.speakZh(g.zh + '。答对了。');
+        } else {
+          b.classList.add('no');
+          qOpts.querySelectorAll('button').forEach(function (x) { if (x.textContent === g.zh) x.classList.add('ok'); });
+          qAfter.textContent = '是「' + g.zh + '」——' + g.desc;
+        }
+        qMeta.textContent = (qi + 1) + ' / ' + ORDER.length + ' · 答对 ' + score;
+        setTimeout(function () { qi++; nextQ(); }, 2100);
+      });
+      qOpts.appendChild(b);
+    });
+    qMeta.textContent = (qi + 1) + ' / ' + ORDER.length + ' · 答对 ' + score;
+  }
+  function finishQuiz() {
+    document.getElementById('quizPlay').style.display = 'none';
+    document.getElementById('quizDone').style.display = '';
+    document.getElementById('qFinal').textContent = score + ' / ' + ORDER.length;
+    var v = document.getElementById('qVerdict');
+    if (score >= 9) v.textContent = '东巴见了都要点头。';
+    else if (score >= 6) v.textContent = '已经认得半部字谱——回到上面再翻一轮，下次全对。';
+    else v.textContent = '象形文字要看「形」：先猜它画的是什么东西，再对答案。';
+  }
+  document.getElementById('quizStart').addEventListener('click', startQuiz);
+  document.getElementById('quizAgain').addEventListener('click', startQuiz);
+})();
+</script>
+</body>
+</html>
