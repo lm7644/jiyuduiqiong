@@ -15,4 +15,6 @@
   <url><loc>/timeline.html</loc><priority>0.7</priority></url>
   <url><loc>/resources.html</loc><priority>0.8</priority></url>
   <url><loc>/about.html</loc><priority>0.6</priority></url>
+  <url><loc>/naxi-diet.html</loc><changefreq>monthly</changefreq></url><
+  <url><loc>/mosuo-lake.html</loc><changefreq>monthly</changefreq></url><
 </urlset>

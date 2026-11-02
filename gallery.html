@@ -677,8 +677,13 @@ try {
 } catch (err) {
   console.warn('3D gallery failed:', err);
   if (window.__galFallback) window.__galFallback();
+  try {
+    var gn = document.getElementById('galNote');
+    if (gn) gn.textContent = '三维展厅未能启动（' + (err && err.message ? err.message : '未知原因') + '）——当前为平面画廊模式，图片完整显示。';
+  } catch (e2) {}
 }
 </script>
+
 
 
 </body>
