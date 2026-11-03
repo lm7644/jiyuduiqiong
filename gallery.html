@@ -421,8 +421,33 @@ try {
   scene.add(cove);
 
   /* 藻井暗示：深绿顶盘 + 三重金环（Kelvingrove 式） */
+  /* 藻井方格贴图（绿底金框阵列，Kelvingrove 式） */
+  var cofferCv = document.createElement('canvas');
+  cofferCv.width = cofferCv.height = 512;
+  (function (g) {
+    g.fillStyle = '#22312a'; g.fillRect(0, 0, 512, 512);
+    var n = 6, cell = 512 / n;
+    for (var r = 0; r < n; r++) {
+      for (var c = 0; c < n; c++) {
+        var cx = c * cell, cy = r * cell;
+        var gg = g.createRadialGradient(cx + cell / 2, cy + cell / 2, 2, cx + cell / 2, cy + cell / 2, cell * 0.62);
+        gg.addColorStop(0, '#2f463a');
+        gg.addColorStop(1, '#1d2b24');
+        g.fillStyle = gg;
+        g.fillRect(cx + 5, cy + 5, cell - 10, cell - 10);
+        g.strokeStyle = 'rgba(154,122,53,.85)';
+        g.lineWidth = 3;
+        g.strokeRect(cx + 5, cy + 5, cell - 10, cell - 10);
+        g.strokeStyle = 'rgba(217,174,82,.35)';
+        g.lineWidth = 1;
+        g.strokeRect(cx + 12, cy + 12, cell - 24, cell - 24);
+      }
+    }
+  })(cofferCv.getContext('2d'));
+  var cofferTex = new THREE.CanvasTexture(cofferCv);
+  cofferTex.colorSpace = THREE.SRGBColorSpace;
   var cofferDisc = new THREE.Mesh(new THREE.CircleGeometry(7.9, 48),
-    new THREE.MeshStandardMaterial({ color: 0x22312a, roughness: 0.85 }));
+    new THREE.MeshStandardMaterial({ map: cofferTex, roughness: 0.85 }));
   cofferDisc.rotation.x = Math.PI / 2; cofferDisc.position.y = 7.82;
   scene.add(cofferDisc);
   var cofferRings = [4.6, 6.1, 7.6];
@@ -723,6 +748,7 @@ try {
   } catch (e2) {}
 }
 </script>
+
 
 
 
