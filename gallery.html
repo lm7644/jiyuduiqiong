@@ -291,30 +291,31 @@ try {
     tex.anisotropy = 4;
     return tex;
   }
+  /* 米金棋盘拼花大理石地面（Kelvingrove 式） */
   var floorTex = canvasTex(1024, function (g, s) {
-    g.fillStyle = '#2a211a'; g.fillRect(0, 0, s, s);
-    var rows = 8, rh = s / rows;
-    for (var r = 0; r < rows; r++) {
-      var off = (r % 2) * s / 6;
-      for (var c = -1; c < 3; c++) {
-        var x = off + c * s / 3;
-        var shade = 38 + Math.floor(Math.random() * 14);
-        g.fillStyle = 'rgb(' + (shade + 6) + ',' + (shade) + ',' + (shade - 8) + ')';
-        g.fillRect(x + 1, r * rh + 1, s / 3 - 2, rh - 2);
-        g.strokeStyle = 'rgba(0,0,0,.28)';
-        for (var k = 0; k < 5; k++) {
-          g.beginPath();
-          var gy = r * rh + 6 + Math.random() * (rh - 12);
-          g.moveTo(x + 4, gy); g.bezierCurveTo(x + s / 9, gy + 3, x + s / 6, gy - 3, x + s / 3 - 4, gy);
-          g.stroke();
-        }
+    var n = 8, cell = s / n;
+    for (var r = 0; r < n; r++) {
+      for (var c = 0; c < n; c++) {
+        var dark = (r + c) % 2 === 0;
+        g.fillStyle = dark ? '#3a3128' : '#d8cdb8';
+        g.fillRect(c * cell, r * cell, cell, cell);
+        var g2 = g.createRadialGradient(c * cell + cell / 2, r * cell + cell / 2, cell * 0.1, c * cell + cell / 2, r * cell + cell / 2, cell * 0.75);
+        g2.addColorStop(0, 'rgba(255,255,255,' + (dark ? 0.06 : 0.28) + ')');
+        g2.addColorStop(1, 'rgba(0,0,0,' + (dark ? 0.18 : 0.08) + ')');
+        g.fillStyle = g2;
+        g.fillRect(c * cell, r * cell, cell, cell);
       }
-      g.fillStyle = 'rgba(0,0,0,.4)'; g.fillRect(0, r * rh - 1, s, 2);
     }
-  }, 5, 5);
+    g.strokeStyle = 'rgba(138,106,47,.5)';
+    g.lineWidth = 2;
+    for (var k = 0; k <= n; k++) {
+      g.beginPath(); g.moveTo(k * cell, 0); g.lineTo(k * cell, s); g.stroke();
+      g.beginPath(); g.moveTo(0, k * cell); g.lineTo(s, k * cell); g.stroke();
+    }
+  }, 6, 6);
   var floor = new THREE.Mesh(
     new THREE.CircleGeometry(19, 72),
-    new THREE.MeshStandardMaterial({ map: floorTex, roughness: 0.34, metalness: 0.1 })
+    new THREE.MeshPhysicalMaterial({ map: floorTex, roughness: 0.3, metalness: 0.05, clearcoat: 0.55, clearcoatRoughness: 0.25 })
   );
   floor.rotation.x = -Math.PI / 2;
   scene.add(floor);
@@ -418,6 +419,45 @@ try {
     new THREE.MeshStandardMaterial({ color: 0x8a6a2f, metalness: 0.6, roughness: 0.4 }));
   cove.rotation.x = Math.PI / 2; cove.position.y = 7.55;
   scene.add(cove);
+
+  /* 藻井暗示：深绿顶盘 + 三重金环（Kelvingrove 式） */
+  var cofferDisc = new THREE.Mesh(new THREE.CircleGeometry(7.9, 48),
+    new THREE.MeshStandardMaterial({ color: 0x22312a, roughness: 0.85 }));
+  cofferDisc.rotation.x = Math.PI / 2; cofferDisc.position.y = 7.82;
+  scene.add(cofferDisc);
+  var cofferRings = [4.6, 6.1, 7.6];
+  for (var cr = 0; cr < cofferRings.length; cr++) {
+    var ring = new THREE.Mesh(new THREE.TorusGeometry(cofferRings[cr], 0.055, 8, 64),
+      new THREE.MeshStandardMaterial({ color: 0x9a7a35, metalness: 0.7, roughness: 0.3 }));
+    ring.rotation.x = Math.PI / 2; ring.position.y = 7.86;
+    scene.add(ring);
+  }
+  /* 墙身大拱环（横贯一遍的金拱） */
+  var archRing = new THREE.Mesh(new THREE.TorusGeometry(14.2, 0.06, 8, 96),
+    new THREE.MeshStandardMaterial({ color: 0x9a7a35, metalness: 0.65, roughness: 0.32 }));
+  archRing.rotation.x = Math.PI / 2; archRing.position.y = 5.7;
+  scene.add(archRing);
+  /* 中央吊灯组（金环 + 六盏乳白灯球） */
+  var chand = new THREE.Group();
+  var chRing = new THREE.Mesh(new THREE.TorusGeometry(0.85, 0.05, 8, 48), goldMat);
+  chRing.rotation.x = Math.PI / 2;
+  chand.add(chRing);
+  var chRod = new THREE.Mesh(new THREE.CylinderGeometry(0.02, 0.02, 1.4, 8),
+    new THREE.MeshStandardMaterial({ color: 0x8a6a2f, metalness: 0.6, roughness: 0.4 }));
+  chRod.position.y = 0.7;
+  chand.add(chRod);
+  for (var cb = 0; cb < 6; cb++) {
+    var cba = cb * Math.PI / 3;
+    var bulb = new THREE.Mesh(new THREE.SphereGeometry(0.1, 12, 12),
+      new THREE.MeshStandardMaterial({ color: 0xfff3dc, emissive: 0xffe9c0, emissiveIntensity: 1.6, roughness: 0.4 }));
+    bulb.position.set(Math.cos(cba) * 0.85, -0.12, Math.sin(cba) * 0.85);
+    chand.add(bulb);
+  }
+  chand.position.y = 5.5;
+  scene.add(chand);
+  var chandLight = new THREE.PointLight(0xffe2b0, 22, 20, 1.7);
+  chandLight.position.set(0, 5.3, 0);
+  scene.add(chandLight);
 
   /* —— 画作 —— */
   var loaderEl = document.getElementById('galLoad');
@@ -683,6 +723,7 @@ try {
   } catch (e2) {}
 }
 </script>
+
 
 
 
