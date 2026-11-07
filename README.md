@@ -2,16 +2,18 @@
 
 国内首个地市级多民族"资源聚合型"线上文化展馆——丽江五族（纳西、彝、傈僳、白、普米）与摩梭人的文化叙事，全部内容基于公开权威资料策展，图片来自 Wikimedia Commons 开放授权并逐图署名。
 
-**在线访问**：`（部署后填入你的地址，如 https://<user>.github.io/<repo>/ 或 Cloudflare Pages 域名）`
+**仓库地址**：<https://github.com/lm7644/jiyuduiqiong>（私有仓库；静态站可直接双击 `index.html` 浏览，公网发布方式见下文）
+
+> 说明：GitHub Pages 对私有仓库不开放（免费账户），公网 200 可访问的展示地址需二选一：仓库转为 Public 后启用 Pages，或接入 Cloudflare Pages。本仓库不做可见性变更，仅在此说明。
 
 ![License: MIT](https://img.shields.io/badge/Code-MIT-blue.svg) ![Content: CC BY-NC-SA 4.0](https://img.shields.io/badge/Content-CC%20BY--NC--SA%204.0-lightgrey.svg) ![Static](https://img.shields.io/badge/Build-None-green.svg) ![Mobile](https://img.shields.io/badge/Mobile-Verified-brightgreen.svg)
 
 ## 项目亮点
 
-- **三个互动展项**：东巴文字谱（13 字看图识字 + 猜字闯关）、语音导览（浏览器原生朗读六组 35 词条）、Three.js 三维展厅（16 幅环形展墙，WebGL 不可用自动降级平面画廊）
+- **三个互动展项**：东巴文字谱（13 字看图识字 + 猜字闯关 + 浏览器原生朗读）、影音推荐（与五族文化相关的影视与音乐清单）、Three.js 三维展厅（16 幅环形展墙，WebGL 不可用自动降级平面画廊）
 - **东巴文献全球流散地图**：约 3 万册东巴经的跨大洲流散长卷（横向拖动）
 - **诚实的策展**：每条事实附来源；非遗"民族共有、属地申报"边界如实标注；未核实项公开列出
-- **零构建纯静态**：无任何运行时依赖，双击 `index.html` 即可离线打开
+- **零构建纯静态**：无任何运行时依赖，双击 `index.html` 即可离线打开（三维展厅为 ES Module，`file://` 下会自动降级为平面画廊）
 
 ## 本地查看
 
@@ -25,16 +27,16 @@
 
 1. 安装 [GitHub Desktop](https://desktop.github.com/) → File → Add local repository → 选本文件夹（首次会提示 Create repository，可见性选 **Public**）
 2. 填仓库名（建议 `jiyuduiqiong`）→ Publish
-3. 网页端 Settings → Pages → Branch 选 `main` / `(root)` → Save → 约 1 分钟后 `https://<你的用户名>.github.io/<仓库名>/` 即已上线
+3. 网页端 Settings → Pages → Branch 选 `main` / `(root)` → Save → 约 1 分钟后 `https://lm7644.github.io/jiyuduiqiong/` 即已上线
 4. （推荐）再用 Cloudflare Pages 连接同一仓库自动部署：免备案、支持 `_headers` 安全头、速度通常更好——两者可并存
 
 ### 命令行等价操作
 
 ```bash
-cd jinsheng-lishui
-git init && git add -A && git commit -m "feat: 积玉堆琼 v1.9 初始开源"
+cd jiyuduiqiong
+git init && git add -A && git commit -m "feat: 积玉堆琼 v2.2 初始开源"
 git branch -M main
-git remote add origin https://github.com/<你的用户名>/<仓库名>.git
+git remote add origin https://github.com/lm7644/jiyuduiqiong.git
 git push -u origin main
 ```
 
@@ -49,15 +51,24 @@ heritage.html     三项世界遗产 + 8 项国家级非遗
 dongba.html       东巴文献全球流散长卷（横向拖动）
 glyphs.html       东巴文字谱（13 字互动识字 + 猜字闯关）
 gallery.html      三维展厅（Three.js 环形展墙，自动降级平面画廊）
-audio.html        语音导览（浏览器原生朗读六组词条）
+audio.html        影音推荐（与五族文化相关的影视 / 音乐清单）
 timeline.html     大事年表（24 帧，可按时代筛选）
-resources.html    资源目录（60+ 条核实外链，可搜索/筛选）
+resources.html    资源目录（51 条核实外链，可搜索/筛选）
 about.html        方法论·授权·诚实的未核实清单
 404.html          迷路页
 sitemap.xml / robots.txt / _headers
 docs/             开发方案 / 更新日志 / 上线清单
-assets/           main.css / app.js / 70+ 张开放授权图片（img/th 为展厅纹理，共约 27MB）
+tools/check.js    零依赖静态自检（元信息/重复 id/图片 alt/内链/占位符）
+assets/           main.css / app.js / 73 张开放授权图片（img/th 为展厅纹理，共约 28MB）
 ```
+
+## 自检
+
+```bash
+node tools/check.js
+```
+
+零依赖，校验 18 个页面的元信息、标题层级、重复 id、图片替代文本、内链与锚点、占位符残留、移动端可读性守卫；任何一项不通过即以非零码退出。
 
 ## 内容原则
 

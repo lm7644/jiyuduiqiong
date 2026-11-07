@@ -37,6 +37,10 @@
   .g-modal h3 small { font-family: var(--latin); font-size: 12px; letter-spacing: 3px; text-transform: uppercase; color: #6b6459; display: block; margin-top: 6px; font-weight: 400; }
   .g-modal p { font-size: 14.5px; color: var(--ink-2); line-height: 1.9; margin-top: 14px; text-align: left; }
   .g-modal .src { font-size: 12px; color: #6b6459; margin-top: 14px; border-top: 1px dashed rgba(176,141,62,.45); padding-top: 12px; text-align: left; }
+  @media (max-width: 760px) {
+    .g-modal p { font-size: 16px; }
+    .g-modal .src { font-size: 14px; }
+  }
   .g-modal .x { position: absolute; top: 10px; right: 12px; background: none; border: none; font-size: 26px; color: #6b6459; cursor: pointer; width: 44px; height: 44px; line-height: 1; }
   .g-modal .x:hover { color: var(--ink); }
   .speak-btn {
@@ -109,7 +113,7 @@
       <button class="chip" data-gdom="frost">霜露</button>
     </div>
     <div class="glyph-grid rv" id="glyphGrid"></div>
-    <p class="rv" style="font-size:13px;color:#6b6459;margin-top:18px">点卡片看大图与出处；卡片上的小喇叭朗读普通话释义。</p>
+    <p class="rv" style="color:#6b6459;margin-top:18px">点卡片看大图与出处；卡片上的小喇叭朗读普通话释义。</p>
   </div>
 </section>
 
@@ -117,7 +121,7 @@
   <div class="wrap" style="position:relative">
     <span class="side-mark">音同借字</span>
     <div class="sec-head rv"><span class="zh">画不出来就「借音」</span></div>
-    <p class="rv" style="max-width:38em;font-size:15px;color:var(--ink-2);margin-bottom:26px">抽象概念画不出图，东巴就借同音的字代写——如同汉字的假借。以下三例均出自英文维基百科 Dongba symbols 词条（CC BY-SA）：</p>
+    <p class="rv" style="max-width:38em;color:var(--ink-2);margin-bottom:26px">抽象概念画不出图，东巴就借同音的字代写——如同汉字的假借。以下三例均出自英文维基百科 Dongba symbols 词条（CC BY-SA）：</p>
     <div class="rebus rv">
       <div class="rb"><div class="f">眼 <em>myə³</em> 命</div><div class="d">「命」画不出来，就画一只眼睛——「眼」与「命」在纳西语里同音（myə³）。经书中眼睛符号常指命运、寿命。</div></div>
       <div class="rb"><div class="f">碗 <em>xa²</em> 食 · 睡</div><div class="d">木碗的「碗」（xa²）与「食物」同音，又引申「睡觉」（吃与睡同词根 xa²）——一只碗，读出三件事。</div></div>
@@ -140,7 +144,7 @@
         <figcaption><b>哈巴雪山</b> · 临摹自哈巴雪山观景台石碑文字 · Zhangmoon618 / CC BY-SA 4.0 / Wikimedia Commons</figcaption>
       </figure>
     </div>
-    <p class="rv" style="font-size:14px;color:var(--ink-2);margin-top:22px;max-width:38em">两幅字均由维基贡献者 Zhangmoon618 从出版物与碑刻临摹上传。对比着看：同一座雪山，笔画比字谱里的单字更「手写」——东巴文从来不是印刷体，每个东巴笔下都有自己的山。</p>
+    <p class="rv" style="color:var(--ink-2);margin-top:22px;max-width:38em">两幅字均由维基贡献者 Zhangmoon618 从出版物与碑刻临摹上传。对比着看：同一座雪山，笔画比字谱里的单字更「手写」——东巴文从来不是印刷体，每个东巴笔下都有自己的山。</p>
   </div>
 </section>
 
@@ -166,17 +170,17 @@
     <span class="side-mark">猜字闯关</span>
     <div class="sec-head rv"><span class="zh">考考你</span></div>
     <div class="quiz-box rv" id="quizBox">
-      <p id="quizLead" style="font-size:15px;color:var(--ink-2);max-width:34em;margin:0 auto 20px">十道题，每题一个字、四个义项。猜完不算完——去上面的字谱里翻翻它的「亲戚」。</p>
+      <p id="quizLead" style="color:var(--ink-2);max-width:34em;margin:0 auto 20px">十道题，每题一个字、四个义项。猜完不算完——去上面的字谱里翻翻它的「亲戚」。</p>
       <button class="quiz-start" id="quizStart">开始闯关</button>
       <div id="quizPlay" style="display:none">
-        <img class="q-glyph" id="qImg" src="" alt="待猜的东巴文字形">
-        <p id="qAfter" style="font-size:15px;color:var(--ink-2);min-height:24px;margin-top:4px"></p>
+        <img class="q-glyph" id="qImg" alt="待猜的东巴文字形">
+        <p id="qAfter" style="color:var(--ink-2);min-height:24px;margin-top:4px"></p>
         <div class="quiz-opts" id="qOpts"></div>
         <p class="quiz-meta" id="qMeta"></p>
       </div>
       <div id="quizDone" style="display:none">
         <div class="q-score" id="qFinal"></div>
-        <p id="qVerdict" style="font-size:15px;color:var(--ink-2);margin-top:8px"></p>
+        <p id="qVerdict" style="color:var(--ink-2);margin-top:8px"></p>
         <button class="quiz-start" id="quizAgain" style="margin-top:18px">再来一轮</button>
       </div>
     </div>
@@ -197,7 +201,7 @@
 <div class="g-modal" id="gModal" role="dialog" aria-modal="true" aria-label="字形详情">
   <div class="panel">
     <button class="x" aria-label="关闭">&times;</button>
-    <img id="gmImg" src="" alt="">
+    <img id="gmImg" alt="">
     <h3 id="gmZh"></h3>
     <p id="gmDesc"></p>
     <p class="src" id="gmSrc"></p>

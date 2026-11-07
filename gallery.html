@@ -24,7 +24,7 @@
   .gal-btns { display: flex; gap: 10px; pointer-events: auto; }
   .gal-btn {
     background: rgba(23,19,16,.72); color: #f5f0e6; border: 1px solid rgba(245,240,230,.25); border-radius: 4px;
-    font-family: var(--sans); font-size: 13px; letter-spacing: 1px; padding: 9px 16px; cursor: pointer; min-height: 40px;
+    font-family: var(--sans); font-size: 13px; letter-spacing: 1px; padding: 9px 16px; cursor: pointer; min-height: 44px;
     backdrop-filter: blur(6px); transition: border-color .2s, background .2s;
   }
   .gal-btn:hover { border-color: var(--gold); background: rgba(28,26,23,.85); }
@@ -50,6 +50,12 @@
   #galFallback { display: none; padding: 56px 0; }
   .gal-note { font-size: 13px; color: #6b6459; text-align: center; margin-top: 26px; }
   @media (max-width: 640px) { .gal-stage { height: 70vh; } }
+  @media (max-width: 760px) {
+    .gal-cap p { font-size: 16px; }
+    .gal-cap .cr { font-size: 14px; }
+    .gal-cap .no { font-size: 13px; }
+    .gal-hud .hint { font-size: 13px; }
+  }
 </style>
 </head>
 <body data-theme="gold">
@@ -64,6 +70,7 @@
   </div>
 </header>
 
+<h1 class="sr-only">三维展厅</h1>
 <section class="gal-stage" id="galStage" aria-label="三维展厅，可拖动旋转、滚轮缩放">
   <div id="stage"></div>
   <div class="gal-veil"></div>

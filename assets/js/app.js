@@ -118,7 +118,8 @@
     }
     document.addEventListener('click', function (e) {
       var fig = e.target.closest && e.target.closest('figure.fig');
-      if (fig) { openLB(fig); return; }
+      /* 卡片式图组本身是跳转链接：交给链接导航，不再叠开灯箱 */
+      if (fig && !fig.closest('a')) { openLB(fig); return; }
       if (e.target.closest('#lightbox .x') || e.target === lightbox) closeLB();
       if (lightbox.classList.contains('open')) {
         if (e.target.closest('#lightbox .next')) { gi = (gi + 1) % group.length; showLB(); }
