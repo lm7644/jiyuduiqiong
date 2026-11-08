@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /docs/
 
-Sitemap: /sitemap.xml
+Sitemap: https://lm7644.github.io/jiyuduiqiong/sitemap.xml
