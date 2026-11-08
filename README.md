@@ -2,9 +2,9 @@
 
 国内首个地市级多民族"资源聚合型"线上文化展馆——丽江五族（纳西、彝、傈僳、白、普米）与摩梭人的文化叙事，全部内容基于公开权威资料策展，图片来自 Wikimedia Commons 开放授权并逐图署名。
 
-**仓库地址**：<https://github.com/lm7644/jiyuduiqiong>（私有仓库；静态站可直接双击 `index.html` 浏览，公网发布方式见下文）
+**仓库地址**：<https://github.com/lm7644/jiyuduiqiong>（公开仓库；静态站可直接双击 `index.html` 浏览，线上地址见下文）
 
-> 说明：GitHub Pages 对私有仓库不开放（免费账户），公网 200 可访问的展示地址需二选一：仓库转为 Public 后启用 Pages，或接入 Cloudflare Pages。本仓库不做可见性变更，仅在此说明。
+> 说明：本仓库已转为 Public 并启用 GitHub Pages，线上地址 <https://lm7644.github.io/jiyuduiqiong/>（实测 HTTP 200）。
 
 ![License: MIT](https://img.shields.io/badge/Code-MIT-blue.svg) ![Content: CC BY-NC-SA 4.0](https://img.shields.io/badge/Content-CC%20BY--NC--SA%204.0-lightgrey.svg) ![Static](https://img.shields.io/badge/Build-None-green.svg) ![Mobile](https://img.shields.io/badge/Mobile-Verified-brightgreen.svg)
 
