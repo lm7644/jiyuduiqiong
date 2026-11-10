@@ -1,0 +1,11 @@
+/* Noto Sans Lisu (Lisu subset) — 本地内嵌，SIL Open Font License 1.1。
+   源：@fontsource/noto-sans-lisu（OFL），许可全文见 ../fonts/OFL.txt。
+   仅包含傈僳文（Fraser / Old Lisu, U+A4D0–A4FF）子集，随站离线可用。 */
+@font-face {
+  font-family: 'Noto Sans Lisu';
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url(../fonts/noto-sans-lisu-lisu-400-normal.woff2) format('woff2');
+  unicode-range: U+02CD,U+2010,U+300A-300B,U+A4D0-A4FF,U+11FB0;
+}
