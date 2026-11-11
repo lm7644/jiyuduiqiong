@@ -53,7 +53,7 @@ glyphs.html       东巴文字谱（13 字互动识字 + 猜字闯关）
 gallery.html      三维展厅（Three.js 环形展墙，自动降级平面画廊）
 audio.html        影音推荐（与五族文化相关的影视 / 音乐清单）
 timeline.html     大事年表（24 帧，可按时代筛选）
-resources.html    资源目录（51 条核实外链，可搜索/筛选）
+resources.html    资源目录（52 条核实外链，可搜索/筛选）
 about.html        方法论·授权·诚实的未核实清单
 404.html          迷路页
 sitemap.xml / robots.txt / _headers
